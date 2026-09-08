@@ -1,8 +1,9 @@
 ---
 title: {{TITLE}}
+stack: {{STACK}}
+platform: []
 tags: []
 project: {{PROJECT}}
-stack: []
 status: open
 date: {{DATE}}
 ---

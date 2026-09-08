@@ -5,23 +5,50 @@ AI 开发项目中遇到的问题与解决方案知识库。所有项目共享�
 ## 结构
 
 ```
-issues/       每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-slug.md
-templates/    新建问题的模板
-scripts/      命令行工具：新建、搜索、同步
+issues/<技术栈>/   每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-slug.md
+templates/         新建问题的模板
+scripts/           命令行工具：新建、搜索、同步
 ```
+
+### 目录按技术栈分，不按端分
+
+决定解决方案能不能复用的是技术栈，不是端。Flutter 的坑在 iOS 和 Android 上往往是同一个，而 Flutter 和 Swift 在 iOS 上的坑几乎没有交集。目录名用「你会在报错里 grep 的那个框架或语言」：
+
+```
+issues/
+  swift/        原生 iOS
+  kotlin/       原生 Android
+  flutter/
+  uniapp/
+  wechat-mp/    原生小程序
+  web/          React、Vue 等前端
+  java/
+  go/
+  ai-tools/     Claude Code、MCP、模型 API
+  common/       跨栈通用：网络、鉴权、时区、Git、CI
+```
+
+- **目录按需创建**，写第一条时脚本自动建，不预建空目录。名字只允许小写字母、数字、连字符。
+- **放不进任何栈的放 `common/`**。判断标准：换个语言这问题还在不在。在，就是 common。
+- **不做二级目录**。单个目录超过一百条再考虑。
+- **端信息进 `platform` 字段**，允许多值，例如 `platform: [ios, android]`。按端筛用 `search.sh --platform ios`。
+- **边界案例**：uniapp 项目里遇到微信平台特有限制，放 `uniapp/`，platform 写 `[wechat]`。原则是放在你改代码的那个框架下。
 
 ## 使用
 
 ```bash
-scripts/search.sh <关键词>            # 全文搜索，支持多个关键词
-scripts/new-issue.sh "<标题>"          # 从模板创建一条记录并打开
-scripts/sync.sh                        # pull + commit + push
+scripts/search.sh <关键词...>                      # 全文搜索，多个关键词是 AND
+scripts/search.sh --in flutter <关键词>            # 限定技术栈
+scripts/search.sh --platform ios <关键词>          # 按端过滤
+scripts/new-issue.sh <技术栈> "<标题>" [项目名]    # 从模板创建
+scripts/sync.sh [提交信息]                         # commit + pull + push
 ```
 
 在任意项目的 Claude Code 里：
 
 ```
 /issues search 流式 超时
+/issues search --in flutter 热重载
 /issues add
 /issues list
 ```
@@ -30,6 +57,8 @@ scripts/sync.sh                        # pull + commit + push
 
 - `status`: `solved` 已解决 / `open` 未解决 / `workaround` 有临时方案
 - `tags`: 小写，用技术名或错误类型，例如 `langchain`, `claude-api`, `timeout`, `json-parse`
+- `stack`: 技术栈，与所在目录名相同
+- `platform`: 端，多值，可选值 ios / android / wechat / h5 / web / backend
 - `project`: 遇到问题的项目名，方便回溯
 - 「现象」里尽量粘贴原始报错，检索靠它命中
 

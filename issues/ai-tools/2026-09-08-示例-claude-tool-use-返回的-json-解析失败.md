@@ -2,7 +2,8 @@
 title: 示例：Claude tool_use 返回的 JSON 解析失败
 tags: [claude-api, tool-use, json-parse]
 project: demo-project
-stack: [python, anthropic-sdk]
+stack: ai-tools
+platform: [backend]
 status: solved
 date: 2026-09-08
 ---
