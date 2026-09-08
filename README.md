@@ -83,6 +83,7 @@ scripts/sync.sh [提交信息]                         # commit + pull + push
 - `platform`: 端，多值，可选值 ios / android / wechat / h5 / web / backend
 - `project`: 遇到问题的项目名，方便回溯
 - 「现象」里尽量粘贴原始报错，检索靠它命中
+- **仓库是公开的，写入前脱敏**：密钥、内网地址、账号、手机号、邮箱、客户名、业务数据一律替换成占位符，例如 `sk-***`、`10.x.x.x`、`user@example.com`、`<客户名>`。`/issues add` 推送前会自动检查一遍，但最终责任在提交的人
 
 ## 记什么，不记什么
 
