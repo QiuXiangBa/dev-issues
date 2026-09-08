@@ -1,0 +1,24 @@
+name: Check knowledge base
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - name: Shell syntax
+        run: bash -n install.sh && for script in scripts/*.sh; do bash -n "$script"; done
+      - name: Validate records and generated index
+        run: python3 scripts/issues.py validate && python3 scripts/issues.py index --check
+      - name: Regression tests
+        run: python3 -m unittest discover -s tests -v

@@ -10,11 +10,13 @@ AI 开发项目中遇到的问题与解决方案知识库。所有项目共享�
 git clone https://github.com/QiuXiangBa/dev-issues.git ~/dev-issues && ~/dev-issues/install.sh
 ```
 
-脚本做三件事：仓库放到 `~/dev-issues`，把 `claude/skills/issues` 软链到 `~/.claude/skills/issues`，把 `claude/CLAUDE.snippet.md` 追加到 `~/.claude/CLAUDE.md`。重复执行安全，已完成的步骤会跳过。
+脚本做三件事：仓库放到 `~/dev-issues`，把 `claude/skills/issues` 软链到 `~/.claude/skills/issues`，把 `claude/CLAUDE.snippet.md` 写入 `~/.claude/CLAUDE.md` 的受管区块。重复执行会更新区块内规则，保留区块外的个人配置；已有仓库会先核对 origin，避免接入错误仓库。
 
-接入后在任意项目打开 Claude Code，输入 `/issues` 即可。Skill 是软链，`git pull` 后自动生效，不用重新安装。
+接入后在任意项目打开 Claude Code，输入 `/issues` 即可。Skill 是软链，`git pull` 后自动生效；全局规则片段有更新时，重新执行 `~/dev-issues/install.sh`。
 
-前置条件：已安装 git 和 Claude Code。仓库是公开的，clone 不需要登录。要用 `/issues add` 写入记录则需要 push 权限，先登录 GitHub 并被加为协作者：
+规则区块使用 `<!-- dev-issues:begin -->` 和 `<!-- dev-issues:end -->` 标记。与当前片段完全一致的旧版规则会自动迁移；自定义的同名规则不会被覆盖，脚本会提示如何标记需要更新的区块。已有的其他 Skill 目录或失效软链也不会被覆盖。
+
+前置条件：已安装 Git、Python 3.9+ 和 Claude Code。脚本只依赖 Python 标准库，不需要 pip 安装。自动检查覆盖 macOS 和 Linux；Windows 请使用 WSL。仓库是公开的，clone 不需要登录。要用 `/issues add` 写入记录则需要 push 权限，先登录 GitHub 并被加为协作者：
 
 ```bash
 brew install gh && gh auth login    # 或者配好 SSH key 后把 remote 换成 git@github.com:QiuXiangBa/dev-issues.git
@@ -42,7 +44,8 @@ brew install gh && gh auth login    # 或者配好 SSH key 后把 remote 换成 
 issues/<技术栈>/   每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-<slug>.md，slug 为英文
 INDEX.md           自动生成的索引，按技术栈分组，不要手改
 templates/         新建问题的模板
-scripts/           命令行工具：新建、搜索、索引、同步
+scripts/           Shell 命令入口、共享 Python 解析与校验、同步和安装配置
+tests/             隔离的命令行和本地 Git 回归测试
 claude/            Claude Code 接入：/issues Skill 和全局规则片段
 install.sh         一键接入
 ```
@@ -81,8 +84,19 @@ scripts/search.sh --in flutter <关键词>                    # 限定技术栈
 scripts/search.sh --platform ios <关键词>                  # 按端过滤
 scripts/new-issue.sh <技术栈> <slug> "<标题>" [项目名]     # 从模板创建，slug 为英文小写连字符
 scripts/index.sh                                           # 重新生成 INDEX.md
-scripts/sync.sh [提交信息]                                 # 更新索引 + commit + pull + push
+scripts/index.sh --check                                   # 检查索引是否与记录一致
+scripts/validate.sh [记录路径...]                          # 校验指定记录，不传路径则校验全库
+scripts/sync.sh [-m "提交信息"] <记录路径...>              # 只同步指定记录及生成的索引
+scripts/sync.sh --check <记录路径...>                      # 校验并 fetch，不提交、不推送
 ```
+
+路径参数支持仓库相对路径（`issues/common/2026-09-08-example.md`）或仓库内的绝对路径。搜索不区分大小写，默认按字面量匹配，多个关键词为 AND；可以单独使用 `--in` 或 `--platform` 列出记录。搜索以 `-` 开头的关键词时使用 `scripts/search.sh -- --keyword`。无匹配返回 0；参数、读取或格式错误返回非 0，不会被伪装成无结果。
+
+同步命令不再接受旧版的单个提交信息参数，改用 `-m`，并明确列出本次文件。它会先检查记录格式、正文完整性及常见敏感信息，再 fetch、提交记录、rebase、重新生成索引并推送到当前分支的 upstream。索引只收录 Git 已跟踪的记录，不会把其他未跟踪记录带入提交。同步会重建本地 `INDEX.md`，请勿手工编辑它。
+
+有其他已跟踪修改或暂存文件时，同步会停止并保留现场；请先单独提交或 stash。其他未跟踪文件保留原样。待推送的每个本地提交也会检查文件范围和敏感信息，避免把之前的无关提交或已从最终版本移除的密钥一起推送。
+
+多人新增不同记录时，索引在 rebase 后生成；若重试时仅索引冲突，会自动重建。记录正文冲突则保留 rebase 状态并提供处理步骤。网络、鉴权、upstream 配置和推送失败分别保留 Git 错误；推送失败后本地提交仍在，处理原因后使用原命令重试。`git rebase --abort` 只取消 rebase，不删除此前的本地提交。
 
 在任意项目的 Claude Code 里：
 
@@ -105,6 +119,20 @@ scripts/sync.sh [提交信息]                                 # 更新索引 + 
 - 文件名的 slug 用英文，标题用中文放 frontmatter。中文文件名在 GitHub 链接里会变成一长串编码，Windows 上还可能乱码
 - **已有记录不改正文**。补充信息用 `/issues update`，在文末追加「## 更新 YYYY-MM-DD」段落，保留演变过程
 - **仓库是公开的，写入前脱敏**：密钥、内网地址、账号、手机号、邮箱、客户名、业务数据一律替换成占位符，例如 `sk-***`、`10.x.x.x`、`user@example.com`、`<客户名>`。`/issues add` 推送前会自动检查一遍，但最终责任在提交的人
+
+Frontmatter 使用受限的 YAML 格式：字段为单行字符串或单行字符串数组，例如 `platform: [ios, android]`、`versions: ["tool 1, build 2"]`。标题、项目名包含 `: `、` #`、引号或其他特殊字符时，使用 JSON 双引号字符串（双引号写成 `\"`，反斜杠写成 `\\`）；新建脚本自动处理。支持 YAML 单引号字符串，不支持多行值、嵌套对象、锚点和别名。未知或重复字段、非法状态/端/标签、日期与文件名不一致、stack 与目录不一致均会报错。新建时允许空正文用于编辑，同步前「现象」「原因」「解决方案」必须填写。
+
+同步的敏感信息检查覆盖常见密钥、认证头、凭据赋值、私网 IPv4、内部域名后缀、手机号和非示例邮箱；报错仅显示路径、行号和类别。它不能判断客户名、业务数据或任意格式的凭据，仍需人工或 Skill 审阅全部本次内容。命中后使用占位符脱敏；历史提交中命中时，需要先清理尚未推送的本地历史。
+
+## 开发检查
+
+```bash
+python3 -m unittest discover -s tests -v
+scripts/validate.sh
+scripts/index.sh --check
+```
+
+测试使用临时目录和本地 bare Git 仓库，覆盖特殊字符、带空格路径、格式错误、同步范围、敏感信息、并发新增、推送失败重试、正文冲突和安装规则升级。GitHub Actions 在 macOS、Linux 上执行测试、Shell 语法及索引一致性检查。
 
 ## 记什么，不记什么
 

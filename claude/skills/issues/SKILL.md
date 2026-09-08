@@ -1,6 +1,6 @@
 ---
 name: issues
-description: 跨项目共享的 AI 开发问题知识库。搜索、新增、更新、列出已记录的问题与解决方案。用法 /issues search <关键词>、/issues add、/issues update <关键词>、/issues list。遇到报错或调试卡住时先用 search；问题解决后用 add 记录。
+description: 搜索、新增、追加更新和列出跨项目共享的技术问题与解决方案。用于查询已有排障记录，或记录可复用的技术解法；不用于保存项目专属业务需求。
 ---
 
 # 问题知识库
@@ -25,9 +25,9 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、更
 
 ### search [--in <技术栈>] [--platform <端>] <关键词...>
 
-1. 先执行 `cd ~/dev-issues && git pull --rebase --autostash --quiet` 拉最新。
+1. 工作区干净且没有本地待推送提交时，执行 `git -C ~/dev-issues pull --ff-only --quiet` 拉最新。有本地改动、离线或拉取失败时，使用现有本地记录并告知用户未更新，不自动 stash 或 rebase。
 2. 准备关键词。取用户给的词，加上从当前报错里提取的 2 到 3 个关键 token（库名、错误类型、函数名）。中文关键词补一版英文，英文补一版中文，例如「超时」和 timeout 都搜。
-3. 执行 `~/dev-issues/scripts/search.sh [--in 栈] [--platform 端] <关键词...>`。多个关键词是 AND 关系，先用中文版搜，再用英文版搜，都没结果就减少关键词各重试一次。技术栈优先取项目侧声明，没有声明再从项目文件判断。能判断时先用 `--in` 搜，没结果再去掉 `--in` 全库搜一次。
+3. 执行 `~/dev-issues/scripts/search.sh [--in 栈] [--platform 端] <关键词...>`。关键词按字面量匹配、不区分大小写，多个关键词是 AND 关系，先用中文版搜，再用英文版搜，都没结果就减少关键词各重试一次。技术栈优先取项目侧声明，没有声明再从项目文件判断。能判断时先用 `--in` 搜，没结果再去掉 `--in` 全库搜一次。以 `-` 开头的关键词放在 `--` 后；脚本返回非 0 是操作或格式错误，应报告具体错误，不当作没有记录。
 4. 命中后用 Read 读取最相关的 1 到 3 个文件，向用户总结「原因」和「解决方案」，并给出文件路径。留意 `versions` 字段，如果记录的版本和用户当前版本差得远，提醒解法可能已过时。
 5. 没有命中就明确说没有记录，不要编造。
 
@@ -37,17 +37,17 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、更
 
 0. 先按「记录标准」判断这个问题是否属于这个库。不属于就告诉用户原因，建议记到项目自己的文档或 issue，然后停止。灰色地带的问题可以记，但要去掉业务细节，只保留技术模式和解法。
 1. 判断技术栈目录。先看项目侧声明，有就用声明的目录和端。没有声明再看当前项目文件：Package.swift 或 .xcodeproj 是 swift，build.gradle 是 kotlin，pubspec.yaml 是 flutter，manifest.json 加 pages.json 是 uniapp，app.json 加 project.config.json 是 wechat-mp，package.json 带 react 或 vue 是 web，pom.xml 或 build.gradle 带 spring 是 java，go.mod 是 go；问题出在 Claude Code、MCP、模型 API 上是 ai-tools；换个语言问题还在的是 common。判断不了就问用户，不要猜。目录名小写，先用 `ls ~/dev-issues/issues` 看已有目录，优先复用。
-2. 查重。用标题里的 2 到 3 个关键词（中英文各一版）执行 `search.sh --in <栈>`。命中且确实是同一个问题，就改走 update 流程在原记录上追加，不要新建。
+2. 按 search 第一步尝试更新本地库，再查重。用标题里的 2 到 3 个关键词（中英文各一版）执行 `search.sh --in <栈>`。命中且确实是同一个问题，就改走 update 流程在原记录上追加，不要新建。
 3. 从对话中提炼：一句话标题、英文 slug（3 到 6 个词，小写连字符，例如 `tool-use-json-truncated`）、现象（尽量带原始报错）、原因、解决方案、相关链接、涉及的框架和工具版本。项目名取当前工作目录名。
 4. 执行 `~/dev-issues/scripts/new-issue.sh <技术栈> <slug> "<标题>" "<项目名>"` 得到文件路径。
-5. 用 Edit 填充 frontmatter 的 platform（多值，可选 ios / android / wechat / h5 / web / backend；项目侧有声明就直接填声明的值）、versions（例如 `[flutter 3.24.0, xcode 16.1]`，不知道就问用户或从 lock 文件读）、tags、status，以及正文各节。tags 小写，用技术名或错误类型。
+5. 用 Edit 填充 frontmatter 的 platform（多值，可选 ios / android / wechat / h5 / web / backend；项目侧有声明就直接填声明的值）、versions（例如 `[flutter 3.24.0, xcode 16.1]`，不知道就问用户或从 lock 文件读）、tags、status，以及正文各节。tags 用小写字母、数字和连字符。字段使用单行字符串或单行字符串数组；含特殊字符时使用 JSON 双引号字符串，不写多行 YAML、嵌套对象或锚点。执行 `~/dev-issues/scripts/validate.sh <记录路径>` 校验。
 6. 推送前做脱敏检查。仓库是公开的，逐项检查刚写入的内容：
    - 密钥、token、密码、Authorization 头、cookie
    - 内网 IP、内部域名、服务器主机名
    - 账号、手机号、邮箱、真实用户数据
    - 客户名、未公开的产品名、业务数据
    发现就替换成占位符，例如 `sk-***`、`10.x.x.x`、`user@example.com`、`<客户名>`。替换后把改了哪些项告诉用户，由用户确认再推送。没发现就直接说「未发现敏感信息」。
-7. 执行 `~/dev-issues/scripts/sync.sh "add: <标题>"` 推送。索引 INDEX.md 会自动更新。
+7. 在用户授权的写入与推送范围内，执行 `~/dev-issues/scripts/sync.sh -m "add: <标题>" "<记录路径>"`。路径使用新建脚本返回的绝对路径；多条记录逐一列出。脚本仅提交这些记录及自动生成的 INDEX.md，并检查实际暂存内容和待推送历史。可以先加 `--check` 做预检（会 fetch，不会提交或推送）。
 8. 向用户回报文件路径。如果对话中信息不够，先问用户缺哪一项，不要留空模板。
 
 ### update <关键词...>
@@ -64,15 +64,16 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、更
    ```
 3. 需要的话改 frontmatter 的 status，并把新版本追加到 versions。
 4. 同 add 的脱敏检查。
-5. 执行 `~/dev-issues/scripts/sync.sh "update: <标题>"` 推送。
+5. 校验记录后，在用户授权的范围内执行 `~/dev-issues/scripts/sync.sh -m "update: <标题>" "<记录绝对路径>"` 推送。
 
 ### list [技术栈|status]
 
-直接 Read `~/dev-issues/INDEX.md` 展示给用户。参数是目录名就只展示该节，是 solved / open / workaround 就只列该状态的行。
+先执行 `~/dev-issues/scripts/index.sh` 校验并生成本地索引，再 Read `~/dev-issues/INDEX.md` 展示给用户。生成失败就报告错误，不展示旧索引作为最新结果。参数是目录名就只展示该节，是 solved / open / workaround 就只列该状态的行。
 
 ## 注意
 
-- 写入前必须 pull，写入后必须 push，否则多设备会冲突。sync.sh 遇到冲突会打印处理步骤，原样转告用户。
+- 写入前按 search 流程尝试更新；同步由脚本执行 fetch / rebase / push。同步失败时如实说明记录只保存在本地。正文冲突按脚本步骤处理；网络或权限错误处理原因后再重试，不自动循环重试或强制推送。
+- 其他已跟踪改动或暂存文件会阻止同步，不要为了通过检查把无关文件加入本次路径或自动清理用户改动。其他未跟踪记录不会随本次索引发布。
 - 仓库是公开的。任何写入操作，包括 add 和 update，推送前都要做脱敏检查。
 - 不要修改已有记录的正文，只能通过 update 追加。
 - INDEX.md 由脚本生成，不要手改。
