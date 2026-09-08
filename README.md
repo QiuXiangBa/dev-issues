@@ -14,13 +14,13 @@ git clone https://github.com/QiuXiangBa/dev-issues.git ~/dev-issues && ~/dev-iss
 
 接入后在任意项目打开 Claude Code，输入 `/issues` 即可。Skill 是软链，`git pull` 后自动生效，不用重新安装。
 
-前置条件：已安装 git 和 Claude Code。仓库是私有的，新电脑先登录 GitHub 再 clone：
+前置条件：已安装 git 和 Claude Code。仓库是公开的，clone 不需要登录。要用 `/issues add` 写入记录则需要 push 权限，先登录 GitHub 并被加为协作者：
 
 ```bash
-brew install gh && gh auth login    # 或者配好 SSH key 后把 clone 地址换成 git@github.com:QiuXiangBa/dev-issues.git
+brew install gh && gh auth login    # 或者配好 SSH key 后把 remote 换成 git@github.com:QiuXiangBa/dev-issues.git
 ```
 
-新成员需要先被加为仓库协作者，否则 clone 会提示没有权限。
+只读使用的话，跳过这一步即可。
 
 ## 结构
 
