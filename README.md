@@ -2,12 +2,28 @@
 
 AI 开发项目中遇到的问题与解决方案知识库。所有项目共享，通过 Claude Code 全局 Skill `/issues` 访问。
 
+## 接入
+
+新电脑或新成员，一条命令：
+
+```bash
+git clone https://github.com/QiuXiangBa/dev-issues.git ~/dev-issues && ~/dev-issues/install.sh
+```
+
+脚本做三件事：仓库放到 `~/dev-issues`，把 `claude/skills/issues` 软链到 `~/.claude/skills/issues`，把 `claude/CLAUDE.snippet.md` 追加到 `~/.claude/CLAUDE.md`。重复执行安全，已完成的步骤会跳过。
+
+接入后在任意项目打开 Claude Code，输入 `/issues` 即可。Skill 是软链，`git pull` 后自动生效，不用重新安装。
+
+要求：已安装 git 和 Claude Code，有本仓库的读权限；要写入还需要 push 权限。
+
 ## 结构
 
 ```
 issues/<技术栈>/   每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-slug.md
 templates/         新建问题的模板
 scripts/           命令行工具：新建、搜索、同步
+claude/            Claude Code 接入：/issues Skill 和全局规则片段
+install.sh         一键接入
 ```
 
 ### 目录按技术栈分，不按端分
