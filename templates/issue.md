@@ -2,6 +2,7 @@
 title: {{TITLE}}
 stack: {{STACK}}
 platform: []
+versions: []
 tags: []
 project: {{PROJECT}}
 status: open

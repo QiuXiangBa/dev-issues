@@ -39,12 +39,15 @@ brew install gh && gh auth login    # 或者配好 SSH key 后把 remote 换成 
 ## 结构
 
 ```
-issues/<技术栈>/   每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-slug.md
+issues/<技术栈>/   每条问题一个 Markdown 文件，文件名 YYYY-MM-DD-<slug>.md，slug 为英文
+INDEX.md           自动生成的索引，按技术栈分组，不要手改
 templates/         新建问题的模板
-scripts/           命令行工具：新建、搜索、同步
+scripts/           命令行工具：新建、搜索、索引、同步
 claude/            Claude Code 接入：/issues Skill 和全局规则片段
 install.sh         一键接入
 ```
+
+看全部记录：[INDEX.md](INDEX.md)。示例记录：[issues/ai-tools/2026-09-08-tool-use-json-truncated.md](issues/ai-tools/2026-09-08-tool-use-json-truncated.md)，照这个详细程度写。
 
 ### 目录按技术栈分，不按端分
 
@@ -73,20 +76,21 @@ issues/
 ## 使用
 
 ```bash
-scripts/search.sh <关键词...>                      # 全文搜索，多个关键词是 AND
-scripts/search.sh --in flutter <关键词>            # 限定技术栈
-scripts/search.sh --platform ios <关键词>          # 按端过滤
-scripts/new-issue.sh <技术栈> "<标题>" [项目名]    # 从模板创建
-scripts/sync.sh [提交信息]                         # commit + pull + push
+scripts/search.sh <关键词...>                              # 全文搜索，多个关键词是 AND
+scripts/search.sh --in flutter <关键词>                    # 限定技术栈
+scripts/search.sh --platform ios <关键词>                  # 按端过滤
+scripts/new-issue.sh <技术栈> <slug> "<标题>" [项目名]     # 从模板创建，slug 为英文小写连字符
+scripts/index.sh                                           # 重新生成 INDEX.md
+scripts/sync.sh [提交信息]                                 # 更新索引 + commit + pull + push
 ```
 
 在任意项目的 Claude Code 里：
 
 ```
-/issues search 流式 超时
-/issues search --in flutter 热重载
-/issues add
-/issues list
+/issues search 流式 超时          # 中英文关键词都会搜，先搜当前项目的技术栈再搜全库
+/issues add                       # 先查重再新建，推送前脱敏检查
+/issues update 热重载             # 给已有记录追加「更新」段落、改状态
+/issues list [技术栈|status]      # 展示索引
 ```
 
 ## 记录规范
@@ -95,8 +99,11 @@ scripts/sync.sh [提交信息]                         # commit + pull + push
 - `tags`: 小写，用技术名或错误类型，例如 `langchain`, `claude-api`, `timeout`, `json-parse`
 - `stack`: 技术栈，与所在目录名相同
 - `platform`: 端，多值，可选值 ios / android / wechat / h5 / web / backend
+- `versions`: 涉及的框架和工具版本，例如 `[flutter 3.24.0, xcode 16.1]`。框架的坑大多和版本相关，不记一年后就没法判断还适不适用
 - `project`: 遇到问题的项目名，方便回溯
 - 「现象」里尽量粘贴原始报错，检索靠它命中
+- 文件名的 slug 用英文，标题用中文放 frontmatter。中文文件名在 GitHub 链接里会变成一长串编码，Windows 上还可能乱码
+- **已有记录不改正文**。补充信息用 `/issues update`，在文末追加「## 更新 YYYY-MM-DD」段落，保留演变过程
 - **仓库是公开的，写入前脱敏**：密钥、内网地址、账号、手机号、邮箱、客户名、业务数据一律替换成占位符，例如 `sk-***`、`10.x.x.x`、`user@example.com`、`<客户名>`。`/issues add` 推送前会自动检查一遍，但最终责任在提交的人
 
 ## 记什么，不记什么
@@ -118,7 +125,7 @@ scripts/sync.sh [提交信息]                         # commit + pull + push
 
 ### 灰色地带
 
-业务问题背后暴露的技术模式值得记。「退款状态机」本身不记，但「状态机在并发回调下重复流转」可以记到 `backend/`，写的时候去掉业务细节，只留模式和解法。
+业务问题背后暴露的技术模式值得记。「退款状态机」本身不记，但「状态机在并发回调下重复流转」可以记下来，放在改代码的那个栈下（`java/`、`go/`），换个语言问题还在的放 `common/`。写的时候去掉业务细节，只留模式和解法。
 
 ### 快速自测
 
