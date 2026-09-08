@@ -7,6 +7,18 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、列
 
 仓库位于 `~/dev-issues`，远端 https://github.com/QiuXiangBa/dev-issues 。每条问题是 `issues/<技术栈>/` 下一个 Markdown 文件，带 frontmatter：title / stack / platform / tags / project / status / date。目录按技术栈分（swift、kotlin、flutter、uniapp、wechat-mp、web、java、go、ai-tools、common），不按端分；端信息在 `platform` 字段里，允许多值。
 
+## 项目侧声明
+
+执行 search 或 add 前，先看当前项目根目录的 `CLAUDE.md` 有没有「## 问题知识库」一节。格式：
+
+```markdown
+## 问题知识库
+- 技术栈目录：uniapp
+- 端：[wechat, h5]
+```
+
+有声明就直接用，不要再扫项目文件猜。没有声明才按下面各子命令里的规则推断。
+
 ## 子命令
 
 参数 `$ARGUMENTS` 的第一个词是子命令，其余是参数。没有子命令时按 `search` 处理。
@@ -14,7 +26,7 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、列
 ### search [--in <技术栈>] [--platform <端>] <关键词...>
 
 1. 先执行 `cd ~/dev-issues && git pull --rebase --quiet` 拉最新。
-2. 执行 `~/dev-issues/scripts/search.sh [--in 栈] [--platform 端] <关键词...>`。关键词取用户给的词，加上从当前报错里提取的 2 到 3 个关键 token（库名、错误类型、函数名）。多个关键词是 AND 关系，没结果时减少关键词重试一次。能从当前项目判断技术栈时先用 `--in` 搜，没结果再去掉 `--in` 全库搜一次。
+2. 执行 `~/dev-issues/scripts/search.sh [--in 栈] [--platform 端] <关键词...>`。关键词取用户给的词，加上从当前报错里提取的 2 到 3 个关键 token（库名、错误类型、函数名）。多个关键词是 AND 关系，没结果时减少关键词重试一次。技术栈优先取项目侧声明，没有声明再从项目文件判断。能判断时先用 `--in` 搜，没结果再去掉 `--in` 全库搜一次。
 3. 命中后用 Read 读取最相关的 1 到 3 个文件，向用户总结「原因」和「解决方案」，并给出文件路径。
 4. 没有命中就明确说没有记录，不要编造。
 
@@ -23,10 +35,10 @@ description: 跨项目共享的 AI 开发问题知识库。搜索、新增、列
 把当前对话里刚解决的问题记录下来。
 
 0. 先按「记录标准」判断这个问题是否属于这个库。不属于就告诉用户原因，建议记到项目自己的文档或 issue，然后停止。灰色地带的问题可以记，但要去掉业务细节，只保留技术模式和解法。
-1. 判断技术栈目录。看当前项目：Package.swift 或 .xcodeproj 是 swift，build.gradle 是 kotlin，pubspec.yaml 是 flutter，manifest.json 加 pages.json 是 uniapp，app.json 加 project.config.json 是 wechat-mp，package.json 带 react 或 vue 是 web，pom.xml 或 build.gradle 带 spring 是 java，go.mod 是 go；问题出在 Claude Code、MCP、模型 API 上是 ai-tools；换个语言问题还在的是 common。判断不了就问用户，不要猜。目录名小写，先用 `ls ~/dev-issues/issues` 看已有目录，优先复用。
+1. 判断技术栈目录。先看项目侧声明，有就用声明的目录和端。没有声明再看当前项目文件：Package.swift 或 .xcodeproj 是 swift，build.gradle 是 kotlin，pubspec.yaml 是 flutter，manifest.json 加 pages.json 是 uniapp，app.json 加 project.config.json 是 wechat-mp，package.json 带 react 或 vue 是 web，pom.xml 或 build.gradle 带 spring 是 java，go.mod 是 go；问题出在 Claude Code、MCP、模型 API 上是 ai-tools；换个语言问题还在的是 common。判断不了就问用户，不要猜。目录名小写，先用 `ls ~/dev-issues/issues` 看已有目录，优先复用。
 2. 从对话中提炼：一句话标题、现象（尽量带原始报错）、原因、解决方案、相关链接。项目名取当前工作目录名。
 3. 执行 `~/dev-issues/scripts/new-issue.sh <技术栈> "<标题>" "<项目名>"` 得到文件路径。
-4. 用 Edit 填充 frontmatter 的 platform（多值，可选 ios / android / wechat / h5 / web / backend）、tags、status，以及正文各节。tags 小写，用技术名或错误类型。
+4. 用 Edit 填充 frontmatter 的 platform（多值，可选 ios / android / wechat / h5 / web / backend；项目侧有声明就直接填声明的值）、tags、status，以及正文各节。tags 小写，用技术名或错误类型。
 5. 推送前做脱敏检查。仓库是公开的，逐项检查刚写入的内容：
    - 密钥、token、密码、Authorization 头、cookie
    - 内网 IP、内部域名、服务器主机名

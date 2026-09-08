@@ -22,6 +22,20 @@ brew install gh && gh auth login    # 或者配好 SSH key 后把 remote 换成 
 
 只读使用的话，跳过这一步即可。
 
+## 项目侧配置（可选）
+
+接入后所有项目自动生效，项目自己的 CLAUDE.md 不需要改任何东西。
+
+只有一种情况值得加：`/issues add` 默认靠扫项目文件推断技术栈，混合项目或 monorepo 可能猜错或停下来问。在项目的 `CLAUDE.md` 里加两行就不用猜了：
+
+```markdown
+## 问题知识库
+- 技术栈目录：uniapp
+- 端：[wechat, h5]
+```
+
+技术栈目录写 `issues/` 下的目录名，端写 platform 字段的值。加了以后 `/issues search` 先在该目录下搜，`/issues add` 直接写进该目录并自动填 platform。
+
 ## 结构
 
 ```
