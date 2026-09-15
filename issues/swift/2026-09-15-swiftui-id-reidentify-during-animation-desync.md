@@ -70,3 +70,24 @@ struct SheetContent: View {
 ## 相关链接
 
 - 同一组件的另一个坑（`if` + `transition` 自绘弹层关闭时掉层）：`issues/swift/2026-09-14-swiftui-zstack-removal-transition-hidden.md`
+
+## 更新 2026-09-15
+
+把同一修法推广到另外两个面板时踩到 `onChange` 的一个配套坑：用 `.onChange(of: isPresented) { if $0 { resetDraft() } }` 重置，`resetDraft()` 里直接读 `self.editing`（宿主传进来的普通 `let`），结果编辑面板打开时表单是空的、随后的新建面板反而预填了上一条——草稿永远慢一拍。
+
+原因：`onChange(of:perform:)` 触发时跑的是**上一轮 body 注册的闭包**，闭包捕获的 `self` 是旧的视图值。宿主在同一事务里先改编辑目标再置 `isPresented = true`，闭包看到的 `editing` 仍是上次打开的。第一处面板没踩到，只因为它重置时读的是 `@Binding`（走的是 State 存储，永远最新）。
+
+解法二选一：
+
+- 需要的值从 Binding 读；
+- 或者把需要的值塞进被观察的值里，从闭包参数取（闭包参数是新值）：
+
+```swift
+private struct DraftSource: Equatable { let editing: Item?; let day: Date }
+
+.onChange(of: isPresented ? DraftSource(editing: editing, day: day) : nil) { source in
+    if let source { resetDraft(from: source) }     // 用 source.editing，不用 self.editing
+}
+```
+
+验证要走「编辑 A → 关 → 新建 → 关 → 编辑 B」这条切换链，只看"快速重开动画"抓不到。
