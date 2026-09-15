@@ -111,3 +111,11 @@ private struct BottomSheetOverlay<Content: View>: View {
 
 - https://developer.apple.com/documentation/swiftui/view/zindex(_:)
 - https://developer.apple.com/documentation/swiftui/view/transition(_:)
+
+## 更新 2026-09-15
+
+同一个坑的第二种症状：**关闭时弹层"掉到某个兄弟下面"，而不是整个瞬间消失**。
+
+同一页 ZStack 里已经有一个兄弟显式给了 `.zIndex(1)`（本例是日历头，为了让把手热区溢出到兄弟之上），顶栏下拉的自绘弹层（`if` + `.transition(.scale.combined(with: .opacity))`）没给 zIndex。打开正常；关闭那一帧弹层掉层，但页面主体没有 zIndex、仍在弹层之下，所以只有带 `zIndex(1)` 的日历头压到弹层上面——录屏抽帧看到弹层淡出过程中被周条盖住上半截，用户描述是"图层发生变化、直接到下面去了"。
+
+判断规则：**只要 ZStack 里有任何兄弟显式给了 zIndex，`if` 弹层的移除层级问题一定会以某种形式露出来**（被谁盖住取决于谁有 zIndex）。修法不变：遮罩和弹层都给一个比那个兄弟更高的 `.zIndex`（本例 `.zIndex(2)`）。新写弹层时直接给 zIndex，不要等症状出现。
