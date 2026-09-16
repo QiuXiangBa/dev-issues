@@ -1,11 +1,12 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 10 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 11 条。
 
 ## ai-tools
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-09-16 | [Figma 旋转存储的画板：多层 SVG 素材用 JSX 转 HTML 整页反旋转后 WKWebView 光栅化](issues/ai-tools/2026-09-16-figma-rotated-artboard-svg-assets-via-html.md) | ios, web | figma, mcp, design-to-code, svg-rasterize, wkwebview, tailwind, rotated-artboard, claude-code |
 | solved | 2026-09-16 | [Figma 云端 MCP 未授权时改走桌面端 Dev Mode 本地 MCP 读设计稿](issues/ai-tools/2026-09-16-figma-mcp-unauthorized-use-desktop-dev-mode.md) | ios, web | figma, mcp, oauth, design-to-code, claude-code, json-rpc, svg-rasterize |
 | solved | 2026-09-08 | [流式调用下 tool&#95;use 的 input 解析失败](issues/ai-tools/2026-09-08-tool-use-json-truncated.md) | backend | claude-api, tool-use, streaming, json-parse, max-tokens |
 
