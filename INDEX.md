@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 12 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 13 条。
 
 ## ai-tools
 
@@ -21,6 +21,7 @@
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
 | solved | 2026-09-17 | [SwiftUI 网络图片优先用 Kingfisher：AsyncImage 无磁盘缓存、无失败占位与取消](issues/swift/2026-09-17-swiftui-asyncimage-no-disk-cache-prefer-kingfisher.md) | ios | swiftui, asyncimage, kingfisher, image-cache, network-image, spm, xcodegen, placeholder |
+| solved | 2026-09-17 | [SwiftUI 分层绘制的按钮用 .plain 样式按下出现重影](issues/swift/2026-09-17-plain-button-style-ghosts-layered-label.md) | ios | swiftui, button, buttonstyle, plain, opacity, ghosting |
 | solved | 2026-09-15 | [SwiftUI 动画中途用 .id 重建子视图会和父容器动画脱节（常驻底部弹窗快速重开时白底先到、内容慢半拍）](issues/swift/2026-09-15-swiftui-id-reidentify-during-animation-desync.md) | ios | swiftui, id, identity, animation, offset, bottom-sheet, state-reset |
 | solved | 2026-09-14 | [SwiftUI ZStack 里 if + transition 的自绘弹层关闭时瞬间消失（移除时掉层被盖住），需要 zIndex](issues/swift/2026-09-14-swiftui-zstack-removal-transition-hidden.md) | ios | swiftui, zstack, transition, zindex, animation, bottom-sheet, overlay |
 | solved | 2026-09-14 | [SwiftUI clipShape/clipped 不裁命中区：溢出裁剪框的装饰图在 ZStack 里吞掉遮罩和按钮的点击](issues/swift/2026-09-14-swiftui-clipshape-hit-testing-overflow.md) | ios | swiftui, clipshape, contentshape, hit-testing, zstack, offset, overlay, tap-gesture |
