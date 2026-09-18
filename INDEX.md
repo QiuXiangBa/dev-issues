@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 13 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 14 条。
 
 ## ai-tools
 
@@ -15,6 +15,12 @@
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
 | solved | 2026-09-08 | [zsh 中 echo ====X==== 分隔横幅触发 =cmd 展开并中断整条命令](issues/common/2026-09-08-zsh-echo-equals-banner-not-found.md) |  | zsh, shell, claude-code, echo, equals-expansion |
+
+## kotlin
+
+| 状态 | 日期 | 标题 | 端 | 标签 |
+|---|---|---|---|---|
+| solved | 2026-09-18 | [Compose ModalBottomSheet 是独立窗口，会盖住 Activity 窗口内的叠层页面](issues/kotlin/2026-09-18-compose-modal-bottom-sheet-covers-in-window-overlay.md) | android | compose, material3, modal-bottom-sheet, window, z-order, overlay, ime |
 
 ## swift
 
