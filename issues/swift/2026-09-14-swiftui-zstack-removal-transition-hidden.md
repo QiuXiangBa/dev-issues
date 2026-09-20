@@ -2,7 +2,7 @@
 title: "SwiftUI ZStack 里 if + transition 的自绘弹层关闭时瞬间消失（移除时掉层被盖住），需要 zIndex"
 stack: "swift"
 platform: [ios]
-versions: [ios 16.0 deployment target, ios 18.6 simulator, xcode 26.6]
+versions: [ios 16.0 deployment target, ios 18.6 simulator, xcode 26.6, xcode 27]
 tags: [swiftui, zstack, transition, zindex, animation, bottom-sheet, overlay]
 project: "xuejieai"
 status: solved
@@ -119,3 +119,13 @@ private struct BottomSheetOverlay<Content: View>: View {
 同一页 ZStack 里已经有一个兄弟显式给了 `.zIndex(1)`（本例是日历头，为了让把手热区溢出到兄弟之上），顶栏下拉的自绘弹层（`if` + `.transition(.scale.combined(with: .opacity))`）没给 zIndex。打开正常；关闭那一帧弹层掉层，但页面主体没有 zIndex、仍在弹层之下，所以只有带 `zIndex(1)` 的日历头压到弹层上面——录屏抽帧看到弹层淡出过程中被周条盖住上半截，用户描述是"图层发生变化、直接到下面去了"。
 
 判断规则：**只要 ZStack 里有任何兄弟显式给了 zIndex，`if` 弹层的移除层级问题一定会以某种形式露出来**（被谁盖住取决于谁有 zIndex）。修法不变：遮罩和弹层都给一个比那个兄弟更高的 `.zIndex`（本例 `.zIndex(2)`）。新写弹层时直接给 zIndex，不要等症状出现。
+
+## 更新 2026-09-20
+
+同一个坑的第三种症状：**不是 `if`，而是 `.id(pageID)` 换内容 + 横滑 transition，滑出的旧页只被挡住一部分**。
+
+分页内容写成 `page(current).id(current.id).transition(.move…)`，夹在 ZStack 的背景装饰层和顶部 chrome 之间，都没给 zIndex。换页时滑入的新页正常，滑出的旧页掉到最底：背景装饰层里不透明的那一条（本例是一条横贯的平台色带）把旧页的下半截盖住，其余透明区域旧页照常可见——所以看起来不是「消失」，而是「滑出途中卡片下半截突然被切掉」。录屏逐帧才看得出来，肉眼只觉得换页时闪了一下。
+
+结论：`.id` 变化导致的移除和 `if` 移除走的是同一套机制，同样掉层。修法不变：参与 transition 的内容给 `.zIndex(1)`，原本靠声明顺序压在它上面的兄弟（chrome）给 `.zIndex(2)`；背景和其它分支（loading / 空态）保持默认 0 即可，叠放顺序与改动前一致。
+
+versions 补充：xcode 27。带方向的横滑写法见 `issues/swift/2026-09-20-swiftui-directional-transition-outside-id.md`。
