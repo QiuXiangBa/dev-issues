@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 15 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 16 条。
 
 ## ai-tools
 
@@ -26,6 +26,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-09-21 | [SwiftUI .id(x).onAppear：只换 id 时挂在 .id 外层的 onAppear 不再触发](issues/swift/2026-09-21-swiftui-onappear-outside-id-not-refired.md) | ios | swiftui, id, identity, onappear, task, side-effect, prefetch, cache-hit, autoplay |
 | solved | 2026-09-20 | [SwiftUI 方向可变的横滑换页 transition：.transition 挂在 .id 外层，方向状态与 id 同一次更新即可正确翻转](issues/swift/2026-09-20-swiftui-directional-transition-outside-id.md) | ios | swiftui, transition, asymmetric, move-edge, id, identity, animation, paging, direction |
 | solved | 2026-09-17 | [SwiftUI 网络图片优先用 Kingfisher：AsyncImage 无磁盘缓存、无失败占位与取消](issues/swift/2026-09-17-swiftui-asyncimage-no-disk-cache-prefer-kingfisher.md) | ios | swiftui, asyncimage, kingfisher, image-cache, network-image, spm, xcodegen, placeholder |
 | solved | 2026-09-17 | [SwiftUI 分层绘制的按钮用 .plain 样式按下出现重影](issues/swift/2026-09-17-plain-button-style-ghosts-layered-label.md) | ios | swiftui, button, buttonstyle, plain, opacity, ghosting |
