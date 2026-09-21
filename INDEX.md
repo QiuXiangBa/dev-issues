@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 16 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 17 条。
 
 ## ai-tools
 
@@ -14,6 +14,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-09-21 | [飞书开放平台按邮箱给个人账号授权文档返回 1063001，需按手机号换 open&#95;id](issues/common/2026-09-21-feishu-share-email-invalid-use-openid.md) | backend | feishu, lark, permission, open-id, tenant-access-token, bitable, docx |
 | solved | 2026-09-08 | [zsh 中 echo ====X==== 分隔横幅触发 =cmd 展开并中断整条命令](issues/common/2026-09-08-zsh-echo-equals-banner-not-found.md) |  | zsh, shell, claude-code, echo, equals-expansion |
 
 ## kotlin
