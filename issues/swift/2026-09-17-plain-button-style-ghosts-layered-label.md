@@ -64,3 +64,16 @@ Button(action: action) {
 
 - Apple 文档 `PlainButtonStyle`：https://developer.apple.com/documentation/swiftui/plainbuttonstyle
 - 项目内实现：tutuai-app `ios/Sources/Pad/DailyTask/PadDailyTaskWidgets.swift` 的 `PadDailyRoundButtonStyle`
+
+## 更新 2026-09-24
+
+禁用态同一机制再次中招：`.disabled(true)` 时 `.plain` 同样会在 Button 内部把 label 逐层压半透明（不合成），分层 label 的底边照样从面下透出来。去掉 `.disabled` 重影就消失，是确认这个根因的最快办法。
+
+两个易错点：
+
+- 在 Button 外层加 `.compositingGroup().opacity(0.5)` 不管用：样式的变暗发生在 Button 内部、在外层合成之前。同一改法之前在另一颗按钮上「生效」，只是因为那颗已经换成了不改透明度的自定义 `ButtonStyle`。
+- 判定方法：截图逐列采样。合成正确时按钮面从上到下单色、只在底部露出底边；如果顶部多出一条「只有面、颜色更浅」的带，就是底边透过了面。
+
+解法不变：分层 label 一律用不改透明度的 `ButtonStyle`（`makeBody` 直接返回 `configuration.label`，按下态通过环境值传给 label 做位移），禁用态的变淡由外层 `.compositingGroup().opacity(...)` 一次完成。`.plain` 只留给单层 label。
+
+复现环境：Xcode 27.0，iOS 18.6 模拟器。
