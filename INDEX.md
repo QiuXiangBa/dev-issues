@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 19 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 20 条。
 
 ## ai-tools
 
@@ -40,3 +40,9 @@
 | solved | 2026-09-08 | [模拟器 Keychain 中的 mock token 跨构建残留导致 live 构建 401 登出](issues/swift/2026-09-08-simulator-keychain-token-persists.md) | ios | simulator, keychain, mock, auth, 401, simctl |
 | solved | 2026-09-08 | [#Preview 引用 #if DEBUG 符号导致 Release 构建失败](issues/swift/2026-09-08-preview-debug-only-symbol-release-build.md) | ios | swiftui, preview, release-build, xcodebuild, debug-macro |
 | solved | 2026-09-08 | [NavigationLink destination 视图的 init 随父视图每次 body 求值重复执行](issues/swift/2026-09-08-navigationlink-destination-eager-init.md) | ios | swiftui, navigationlink, performance, main-thread, state, disk-io |
+
+## wechat-mp
+
+| 状态 | 日期 | 标题 | 端 | 标签 |
+|---|---|---|---|---|
+| solved | 2026-10-03 | [rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪](issues/wechat-mp/2026-10-03-rpx-floor-shrinks-stretched-svg-background.md) | wechat | rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout |
