@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 21 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 22 条。
 
 ## ai-tools
 
@@ -23,6 +23,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-05 | [Compose 照抄 SwiftUI 文字框左上角坐标，字会偏下：按首行基线对齐](issues/kotlin/2026-10-05-compose-text-baseline-match-swiftui.md) | android, ios | compose, swiftui, text, baseline, line-height, port, fixed-canvas, typography |
 | solved | 2026-09-18 | [Compose ModalBottomSheet 是独立窗口，会盖住 Activity 窗口内的叠层页面](issues/kotlin/2026-09-18-compose-modal-bottom-sheet-covers-in-window-overlay.md) | android | compose, material3, modal-bottom-sheet, window, z-order, overlay, ime |
 
 ## swift
