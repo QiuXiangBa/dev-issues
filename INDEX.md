@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 20 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 21 条。
 
 ## ai-tools
 
@@ -45,4 +45,5 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-05 | [自定义 tabBar 盖在页面弹层之上，z-index 再大也盖不住](issues/wechat-mp/2026-10-05-custom-tab-bar-above-page-overlay.md) | wechat | custom-tab-bar, tabbar, z-index, overlay, bottom-sheet |
 | solved | 2026-10-03 | [rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪](issues/wechat-mp/2026-10-03-rpx-floor-shrinks-stretched-svg-background.md) | wechat | rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout |
