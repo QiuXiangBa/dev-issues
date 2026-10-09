@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 24 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 27 条。
 
 ## ai-tools
 
@@ -23,6 +23,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-09 | [Android SoundPool 播长音效被截掉结尾（单段解码上限约 1MB）](issues/kotlin/2026-10-09-soundpool-long-sample-truncated.md) | android | android, soundpool, mediaplayer, audio, sound-effect, truncation |
 | solved | 2026-10-06 | [Compose AnimatedContent 不向外转发子项的文字基线：旁边 alignByBaseline 的单位在内容更新后跳到数字顶边](issues/kotlin/2026-10-06-compose-animatedcontent-drops-baseline.md) | android | compose, animatedcontent, baseline, alignbybaseline, alignment-line, firstbaseline, text, animation |
 | solved | 2026-10-05 | [Compose 照抄 SwiftUI 文字框左上角坐标，字会偏下：按首行基线对齐](issues/kotlin/2026-10-05-compose-text-baseline-match-swiftui.md) | android, ios | compose, swiftui, text, baseline, line-height, port, fixed-canvas, typography |
 | solved | 2026-09-18 | [Compose ModalBottomSheet 是独立窗口，会盖住 Activity 窗口内的叠层页面](issues/kotlin/2026-09-18-compose-modal-bottom-sheet-covers-in-window-overlay.md) | android | compose, material3, modal-bottom-sheet, window, z-order, overlay, ime |
@@ -32,6 +33,8 @@
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
 | solved | 2026-10-09 | [SwiftUI 对 ignoresSafeArea 的 GeometryReader 容器整体 offset 做键盘避让，容器被拉高重新居中，上移量只生效一半](issues/swift/2026-10-09-swiftui-offset-safe-area-container-half-lift.md) | ios | swiftui, keyboard, keyboard-avoidance, offset, geometryreader, ignoressafearea, safe-area, scaleeffect |
+| solved | 2026-10-09 | [SwiftUI 给全部按钮统一加行为（点击音）时，没写 buttonStyle 的默认样式按钮被漏掉](issues/swift/2026-10-09-swiftui-global-button-style-misses-default.md) | ios | swiftui, button, buttonstyle, primitivebuttonstyle, sound-effect, audit, code-review |
+| workaround | 2026-10-09 | [iPad 模拟器浮动键盘开着时，XCUITest 点页面按钮第一下被吞掉、动作不触发](issues/swift/2026-10-09-simulator-floating-keyboard-swallows-tap.md) | ios | xcuitest, ios-simulator, ipad, keyboard, floating-keyboard, ui-testing, tap |
 | solved | 2026-09-21 | [SwiftUI .id(x).onAppear：只换 id 时挂在 .id 外层的 onAppear 不再触发](issues/swift/2026-09-21-swiftui-onappear-outside-id-not-refired.md) | ios | swiftui, id, identity, onappear, task, side-effect, prefetch, cache-hit, autoplay |
 | solved | 2026-09-20 | [SwiftUI 方向可变的横滑换页 transition：.transition 挂在 .id 外层，方向状态与 id 同一次更新即可正确翻转](issues/swift/2026-09-20-swiftui-directional-transition-outside-id.md) | ios | swiftui, transition, asymmetric, move-edge, id, identity, animation, paging, direction |
 | solved | 2026-09-17 | [SwiftUI 网络图片优先用 Kingfisher：AsyncImage 无磁盘缓存、无失败占位与取消](issues/swift/2026-09-17-swiftui-asyncimage-no-disk-cache-prefer-kingfisher.md) | ios | swiftui, asyncimage, kingfisher, image-cache, network-image, spm, xcodegen, placeholder |
