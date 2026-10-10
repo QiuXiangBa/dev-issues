@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 27 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 28 条。
 
 ## ai-tools
 
@@ -23,6 +23,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-10 | [腾讯智聆口语评测 Android SDK 自定义数据源回放整段 PCM 时与建连竞态，音频被静默丢弃导致超时](issues/kotlin/2026-10-10-tencent-soe-buffer-source-race.md) | android | tencent-cloud, soe, speech-evaluation, websocket, okhttp, race-condition, audio, timeout |
 | solved | 2026-10-09 | [Android SoundPool 播长音效被截掉结尾（单段解码上限约 1MB）](issues/kotlin/2026-10-09-soundpool-long-sample-truncated.md) | android | android, soundpool, mediaplayer, audio, sound-effect, truncation |
 | solved | 2026-10-06 | [Compose AnimatedContent 不向外转发子项的文字基线：旁边 alignByBaseline 的单位在内容更新后跳到数字顶边](issues/kotlin/2026-10-06-compose-animatedcontent-drops-baseline.md) | android | compose, animatedcontent, baseline, alignbybaseline, alignment-line, firstbaseline, text, animation |
 | solved | 2026-10-05 | [Compose 照抄 SwiftUI 文字框左上角坐标，字会偏下：按首行基线对齐](issues/kotlin/2026-10-05-compose-text-baseline-match-swiftui.md) | android, ios | compose, swiftui, text, baseline, line-height, port, fixed-canvas, typography |
