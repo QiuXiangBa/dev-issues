@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 30 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 31 条。
 
 ## ai-tools
 
@@ -35,6 +35,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-14 | [Debug 构建硬编码的调试 token 过期后，公开接口（发码 / 登录）也返回 401](issues/swift/2026-10-14-debug-hardcoded-token-public-endpoint-401.md) | ios | auth, 401, authorization-header, debug, hardcoded-token, urlsession, spring |
 | solved | 2026-10-09 | [SwiftUI 对 ignoresSafeArea 的 GeometryReader 容器整体 offset 做键盘避让，容器被拉高重新居中，上移量只生效一半](issues/swift/2026-10-09-swiftui-offset-safe-area-container-half-lift.md) | ios | swiftui, keyboard, keyboard-avoidance, offset, geometryreader, ignoressafearea, safe-area, scaleeffect |
 | solved | 2026-10-09 | [SwiftUI 给全部按钮统一加行为（点击音）时，没写 buttonStyle 的默认样式按钮被漏掉](issues/swift/2026-10-09-swiftui-global-button-style-misses-default.md) | ios | swiftui, button, buttonstyle, primitivebuttonstyle, sound-effect, audit, code-review |
 | workaround | 2026-10-09 | [iPad 模拟器浮动键盘开着时，XCUITest 点页面按钮第一下被吞掉、动作不触发](issues/swift/2026-10-09-simulator-floating-keyboard-swallows-tap.md) | ios | xcuitest, ios-simulator, ipad, keyboard, floating-keyboard, ui-testing, tap |
