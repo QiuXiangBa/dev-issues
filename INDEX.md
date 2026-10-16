@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 32 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 33 条。
 
 ## ai-tools
 
@@ -35,6 +35,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-16 | [SwiftUI ZStack 里垫一层整屏 contentShape + onTapGesture 后，叠在上面的小 Button 点不到（正中也不响应），命中区撑到 44×30 才行](issues/swift/2026-10-16-fullscreen-tap-layer-steals-small-button-taps.md) | ios | swiftui, button, hit-testing, contentshape, tap-gesture, zstack, keyboard-dismiss, xcuitest, touch-target |
 | solved | 2026-10-16 | [AVPlayer seek 到未缓冲处期间周期时间观察者继续报旧位置，自绘进度条退回再跳](issues/swift/2026-10-16-avplayer-seek-observer-reports-old-time.md) | ios | avplayer, avfoundation, seek, periodic-time-observer, progress-bar, swiftui |
 | solved | 2026-10-14 | [Debug 构建硬编码的调试 token 过期后，公开接口（发码 / 登录）也返回 401](issues/swift/2026-10-14-debug-hardcoded-token-public-endpoint-401.md) | ios | auth, 401, authorization-header, debug, hardcoded-token, urlsession, spring |
 | solved | 2026-10-09 | [SwiftUI 对 ignoresSafeArea 的 GeometryReader 容器整体 offset 做键盘避让，容器被拉高重新居中，上移量只生效一半](issues/swift/2026-10-09-swiftui-offset-safe-area-container-half-lift.md) | ios | swiftui, keyboard, keyboard-avoidance, offset, geometryreader, ignoressafearea, safe-area, scaleeffect |
