@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 38 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 40 条。
 
 ## ai-tools
 
@@ -23,6 +23,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-23 | [VectorDrawable 单条 pathData 超过 32,767 字节：编译不报错，运行时 PathParser 读串崩溃](issues/kotlin/2026-10-23-vectordrawable-pathdata-32k-limit.md) | android | vectordrawable, pathdata, aapt2, resources, string-pool, compose, svg, figma |
+| workaround | 2026-10-23 | [Compose lint 的 ModifierDeclarationDetector 遇到返回 Modifier 的扩展函数 NoClassDefFoundError，整个 lint 任务失败](issues/kotlin/2026-10-23-compose-lint-modifier-declaration-detector-crash.md) | android | lint, compose, modifier, agp, androidx, modifier-declaration-detector |
 | open | 2026-10-12 | [ExoPlayer 播放 MP4 从中间位置起播很慢：moov 在文件末尾 + 音视频错位存放导致反复重连](issues/kotlin/2026-10-12-exoplayer-mp4-slow-mid-position-start.md) | android | exoplayer, media3, mp4, moov, faststart, seek, resume, progressive, range-request, cdn |
 | solved | 2026-10-10 | [腾讯智聆口语评测 Android SDK 自定义数据源回放整段 PCM 时与建连竞态，音频被静默丢弃导致超时](issues/kotlin/2026-10-10-tencent-soe-buffer-source-race.md) | android | tencent-cloud, soe, speech-evaluation, websocket, okhttp, race-condition, audio, timeout |
 | solved | 2026-10-10 | [OkHttp WebSocket 服务端先关连接时只回调 onClosing，只在 onClosed 里收尾会一直挂到超时](issues/kotlin/2026-10-10-okhttp-websocket-peer-close-no-onclosed.md) | android, backend | okhttp, websocket, close-frame, callback, timeout, hang |
