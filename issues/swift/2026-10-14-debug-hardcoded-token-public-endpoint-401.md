@@ -61,3 +61,12 @@ if authorized, let token = tokens.token, !token.isEmpty {
 ## 相关链接
 
 - 同为 401 但根因不同的记录：`issues/swift/2026-09-08-simulator-keychain-token-persists.md`（Keychain 残留的 mock token）
+
+## 更新 2026-10-26
+
+另一个项目（tutuai，iOS 客户端同一套网络层写法）再次踩到，补充一个更隐蔽的变体：**同一个写死的兜底 token，在测试环境网关上公开接口照常 200，换到生产环境网关才 401**。
+
+- 测试环境的网关对公开接口（发码 / 登录）不校验 `Authorization`，所以 Debug 包平时联调完全正常，这段兜底代码存在了一个多月没人发现。
+- 排查线上问题时把 Debug 包的 base URL 临时指向生产，`/auth/sms/send`、`/auth/sms/signIn` 一律 401「未经授权」；去掉这个头后同样的请求 200。生产网关的规则和上文 Spring 过滤器一样：头存在就校验，无效就拒。
+- 结论不变：删掉兜底分支，公开接口不带 `Authorization`。多环境的项目额外注意：「某个环境没报错」不代表没问题，不同环境的网关 / 过滤器配置可能不一致，判断标准是「不带头能不能通」而不是「当前环境有没有报错」。
+- 检查命令同上：`grep -rn 'forHTTPHeaderField: "Authorization"'`，重点看 `#if DEBUG` 块。Android 端对应 `grep -rn 'header("Authorization"'`。
