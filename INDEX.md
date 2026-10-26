@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 42 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 43 条。
 
 ## ai-tools
 
@@ -15,6 +15,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-26 | [Debug 包连测试环境、Release 包连生产环境：真机上的后端业务报错在模拟器复现不出来](issues/common/2026-10-26-debug-release-different-backend-env.md) | ios, android | environment, base-url, debug, release, build-config, backend, code-600, simulator, real-device, testflight |
 | solved | 2026-09-28 | [飞书自建应用换 App ID 后 CLI 全线 99991672 / 91403 / open&#95;id cross app：scope、open&#95;id、资源授权都按应用隔离](issues/common/2026-09-28-feishu-app-switch-breaks-scopes-openid-resources.md) | backend | feishu, lark, permission, scope, open-id, app-id, bitable, calendar, drive, lark-cli |
 | solved | 2026-09-21 | [飞书开放平台按邮箱给个人账号授权文档返回 1063001，需按手机号换 open&#95;id](issues/common/2026-09-21-feishu-share-email-invalid-use-openid.md) | backend | feishu, lark, permission, open-id, tenant-access-token, bitable, docx |
 | solved | 2026-09-08 | [zsh 中 echo ====X==== 分隔横幅触发 =cmd 展开并中断整条命令](issues/common/2026-09-08-zsh-echo-equals-banner-not-found.md) |  | zsh, shell, claude-code, echo, equals-expansion |
