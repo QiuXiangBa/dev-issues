@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 40 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 42 条。
 
 ## ai-tools
 
@@ -23,6 +23,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-26 | [Compose 子元素要溢出父容器时 height() 被父约束压扁：改用 wrapContentHeight(unbounded = true)](issues/kotlin/2026-10-26-compose-overflow-child-height-clamped.md) | android | compose, layout, constraints, overflow, wrapcontentheight, unbounded, zstack, swiftui-port |
+| solved | 2026-10-26 | [Compose GenericShape 多段子路径绕向不一致：NonZero 填充下交叠区被挖空](issues/kotlin/2026-10-26-compose-genericshape-subpath-winding-hole.md) | android | compose, path, genericshape, winding, nonzero, addroundrect, swiftui-port, shape |
 | solved | 2026-10-23 | [VectorDrawable 单条 pathData 超过 32,767 字节：编译不报错，运行时 PathParser 读串崩溃](issues/kotlin/2026-10-23-vectordrawable-pathdata-32k-limit.md) | android | vectordrawable, pathdata, aapt2, resources, string-pool, compose, svg, figma |
 | workaround | 2026-10-23 | [Compose lint 的 ModifierDeclarationDetector 遇到返回 Modifier 的扩展函数 NoClassDefFoundError，整个 lint 任务失败](issues/kotlin/2026-10-23-compose-lint-modifier-declaration-detector-crash.md) | android | lint, compose, modifier, agp, androidx, modifier-declaration-detector |
 | open | 2026-10-12 | [ExoPlayer 播放 MP4 从中间位置起播很慢：moov 在文件末尾 + 音视频错位存放导致反复重连](issues/kotlin/2026-10-12-exoplayer-mp4-slow-mid-position-start.md) | android | exoplayer, media3, mp4, moov, faststart, seek, resume, progressive, range-request, cdn |
