@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 43 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 44 条。
 
 ## ai-tools
 
@@ -24,6 +24,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-10-27 | [模拟器测 Compose NavHost predictive back：动画时长放大后预览不动、慢速注入手势被系统取消](issues/kotlin/2026-10-27-compose-predictive-back-emulator-test-pitfalls.md) | android | compose, navigation-compose, predictive-back, animator-duration-scale, emulator, adb, input-swipe, walkthrough |
 | solved | 2026-10-26 | [Compose 子元素要溢出父容器时 height() 被父约束压扁：改用 wrapContentHeight(unbounded = true)](issues/kotlin/2026-10-26-compose-overflow-child-height-clamped.md) | android | compose, layout, constraints, overflow, wrapcontentheight, unbounded, zstack, swiftui-port |
 | solved | 2026-10-26 | [Compose GenericShape 多段子路径绕向不一致：NonZero 填充下交叠区被挖空](issues/kotlin/2026-10-26-compose-genericshape-subpath-winding-hole.md) | android | compose, path, genericshape, winding, nonzero, addroundrect, swiftui-port, shape |
 | solved | 2026-10-23 | [VectorDrawable 单条 pathData 超过 32,767 字节：编译不报错，运行时 PathParser 读串崩溃](issues/kotlin/2026-10-23-vectordrawable-pathdata-32k-limit.md) | android | vectordrawable, pathdata, aapt2, resources, string-pool, compose, svg, figma |
