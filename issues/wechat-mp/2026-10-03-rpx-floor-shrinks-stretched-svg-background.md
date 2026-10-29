@@ -2,8 +2,8 @@
 title: "rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪"
 stack: "wechat-mp"
 platform: [wechat]
-versions: [微信开发者工具 2.02.2608060, 基础库 3.17.2]
-tags: [rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout]
+versions: [微信开发者工具 2.02.2608060, 基础库 3.17.2, 基础库 3.17.3]
+tags: [rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout, flex, columns]
 project: "<小程序项目>"
 status: solved
 date: "2026-10-03"
@@ -63,3 +63,13 @@ date: "2026-10-03"
 
 - 微信官方文档 · WXSS 尺寸单位：https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html
 - MDN · preserveAspectRatio：https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio
+
+## 更新 2026-10-29
+
+同一个取整机制的另外两种表现和做法（基础库 3.17.3，开发者工具 390 宽模拟器实测）：
+
+1. **375 宽上也会少半点。** 按「设计稿 pt × 2 = rpx」写时，奇数 rpx 就是半点：`19rpx` 在 375 宽上是 9.5px → 9px。`1rpx` 是特例：算出来不足 1px 时，基础库在 iOS 上给 0.5px、其它给 1px。需要半点偏移时用 `position: relative; top: 1rpx` 挪，不占排版高度、不影响后面的元素；不要用奇数 rpx 的 margin / height 去凑。
+
+2. **固定 rpx 宽度的多列，误差逐列累加。** 7 列等宽块每列 `width: 96rpx`：375 宽上正好 48px；390 宽上 49.92 → 49px，7 列累计少 6.4px，整组偏左（左边距 10px、右边距 17px）。改成在 rpx 宽的容器里 `flex: 1; min-width: 0` 均分，列宽是小数 px、不再逐列取整，390 宽上左右边距约 10px / 11px。网格、等分 tab 这类「N 个等宽块」都优先用 flex / grid 均分，而不是给每块写 rpx 宽度。
+
+3. 核算补充：取整发生在每个声明值上（`margin: 19rpx 0 0 28rpx` 里四个值各自取整），所以纵向累计误差 = 各个值的舍入之和。`miniprogram-automator` 的 `element.offset()` / `size()` 读到的就是取整后的几何（390 宽上 `152rpx` 的高读出 79，不是 79.04），可以直接拿来和 `floor(rpx / 750 × 屏宽)` 逐项核对。
