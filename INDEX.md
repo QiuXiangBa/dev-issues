@@ -69,4 +69,4 @@
 | solved | 2026-10-20 | [账号恢复失败后跳转登录入口导致自动重登循环](issues/wechat-mp/2026-10-20-auth-recovery-navigation-loop.md) | wechat | auth, session, 401, recovery, navigation, retry, promise |
 | solved | 2026-10-20 | [账号门禁拦截内部清理回调，导航失败后计时和音频仍运行](issues/wechat-mp/2026-10-20-auth-gate-resource-cleanup.md) | wechat | auth, lifecycle, cleanup, navigation, timer, audio, observer |
 | solved | 2026-10-05 | [自定义 tabBar 盖在页面弹层之上，z-index 再大也盖不住](issues/wechat-mp/2026-10-05-custom-tab-bar-above-page-overlay.md) | wechat | custom-tab-bar, tabbar, z-index, overlay, bottom-sheet |
-| solved | 2026-10-03 | [rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪](issues/wechat-mp/2026-10-03-rpx-floor-shrinks-stretched-svg-background.md) | wechat | rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout |
+| solved | 2026-10-03 | [rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪](issues/wechat-mp/2026-10-03-rpx-floor-shrinks-stretched-svg-background.md) | wechat | rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout, flex, columns |
