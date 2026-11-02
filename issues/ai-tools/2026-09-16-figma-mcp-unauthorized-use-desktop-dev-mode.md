@@ -55,3 +55,31 @@ claude mcp add --transport http figma-desktop http://127.0.0.1:3845/mcp
 
 - Figma Dev Mode MCP Server 文档：https://help.figma.com/hc/en-us/articles/32132100833559
 - 项目内落地记录：QiuXiangBa/tutuai-app#29 的 HANDOFF 评论
+
+## 更新 2026-11-02
+
+在另一个新项目里又遇到：Figma 桌面端 Desktop MCP server 已开启（Enabled + Local server），`curl` 访问 `127.0.0.1:3845/mcp` 正常返回，但会话里 `ToolSearch` 搜不到任何 figma 工具，`claude mcp list` 只有云端的 `plugin:figma:figma`（Needs authentication），没有 `figma-desktop`。
+
+原因：上面第 2 步的 `claude mcp add` 不带 `--scope` 时默认是 local 作用域，只写进 `~/.claude.json` 里当前项目路径下的 `projects.<path>.mcpServers`，换一个项目目录就没有了。之前在几个项目里分别登记过，新项目照样要重新登记。
+
+解决：
+
+1. 注册到用户级，所有项目共用，只需做一次：
+
+```bash
+claude mcp add --scope user --transport http figma-desktop http://127.0.0.1:3845/mcp
+claude mcp list   # 应显示 figma-desktop: http://127.0.0.1:3845/mcp (HTTP) - ✔ Connected
+```
+
+2. 注册后当前会话不会加载新工具（`ToolSearch` 仍然找不到），要新开会话，或在交互会话里用 `/mcp` 重连。不想重开就按上面第 3 步用 JSON-RPC 直连。
+
+3. 查各作用域的登记情况：
+
+```bash
+# 项目级（local）
+jq -r '.projects | to_entries[] | select((.value.mcpServers // {}) | length > 0) | "\(.key): \(.value.mcpServers | keys | join(","))"' ~/.claude.json
+# 用户级
+jq -r '.mcpServers // {} | keys | join(",")' ~/.claude.json
+```
+
+同名服务在多个作用域都有时按 local > project > user 取，旧的项目级登记 URL 一样就不用删。
