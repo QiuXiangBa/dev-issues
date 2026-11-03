@@ -3,7 +3,7 @@ title: "腾讯智聆口语评测 Android SDK 自定义数据源回放整段 PCM 
 stack: "kotlin"
 platform: [android]
 versions: ["qcloud-soe-android 2.0.10"]
-tags: [tencent-cloud, soe, speech-evaluation, websocket, okhttp, race-condition, audio, timeout]
+tags: [tencent-cloud, soe, speech-evaluation, websocket, okhttp, race-condition, audio, timeout, rate-limit, streaming]
 project: "kakaai"
 status: solved
 date: "2026-10-10"
@@ -100,3 +100,90 @@ TAIOralController(config).startOralEvaluation(object : TAIListener {
 
 - SDK 为腾讯云控制台下载的 AAR（`qcloud-soe-release-v2.0.10`），无公开源码，以上行为均为反编译确认
 - 项目内记录：私有仓库 Issue #720 / PR #721
+
+## 更新 2026-11-03
+
+上面的解法（整段回放 + 握手闸）还有第二个坑：**录音超过约 8 秒，服务端回终帧报 4000**，原文 `{"code":4000,"message":"音频数据发送过多，请1秒内最多发送3秒音频数据","final":0}`，随后断开连接。只有长句才会触发，单词、短句测不出来，与机型无关。
+
+### 原因
+
+- 反编译 v2.0.10 的 `OralEvaluationer$OralEvaluationRunnable.run()`：`read()` 读到数据（> 0）就立刻发出，马上读下一帧；只有返回 0 才 `Thread.sleep(10)`。**SDK 自己不限速**，发送节奏完全靠数据源 `read()` 阻塞。默认数据源 `AudioRecord.read()` 天然按实时节奏返回，自定义数据源则不会。
+- 回放内存里的整段 PCM 时，握手一放行，整段约 10ms 内全部发完。
+- 官方文档（[1774/107497](https://cloud.tencent.com/document/product/1774/107497)）建议每 40ms 发 40ms 音频（16k PCM 为 1280 字节），即 1:1 实时率；4000 的含义是「1 秒内最多发送 3 秒音频」。服务端对突发有一定容忍，直连实测一次性发送：5.5 / 7.3 / 8.0s 正常出分，9.0 / 9.5 / 11 / 14.5s 全部报 4000。
+
+### 解决方案：边录边送（推荐）
+
+按下就 `startOralEvaluation`，数据源改成流式缓冲：
+
+- 录音线程每采一块就 `append` 一块；
+- `read()` 读空时返回 0，SDK 会 sleep 10ms 再读；
+- 松手时调 `end()`，之后读空才返回 -1，SDK 据此发结束帧；
+- 握手闸照旧保留：握手前 `read()` 一律返回 0，握手期间攒下的录音放行后一次补发（常态 0.2–1.5s，远低于突发上限）。
+
+这样发送速率天然是 1:1，服务端边收边评，松手后几百毫秒内就出分（原来要等整段发完、评完）。真机实测：12s 录音得 96 分，20s 录音得 97 分。
+
+```kotlin
+class PcmStreamSource : TAIPcmDataSource {
+    private val lock = Any()
+    private var samples = ShortArray(16_000)
+    private var size = 0
+    private var cursor = 0
+    private var ended = false
+    @Volatile private var opened = false
+
+    fun open() { opened = true }                       // TAIListener.onMessage 首帧（握手成功）时调用
+
+    fun append(pcm: ByteArray, length: Int) {          // 录音线程逐块调用（s16le）
+        val count = length / 2
+        synchronized(lock) {
+            if (ended) return
+            if (size + count > samples.size) samples = samples.copyOf(maxOf(samples.size * 2, size + count))
+            ByteBuffer.wrap(pcm, 0, count * 2).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(samples, size, count)
+            size += count
+        }
+    }
+
+    fun end() { synchronized(lock) { ended = true } }  // 松手
+
+    override fun read(audioPcmData: ShortArray, length: Int): Int {
+        if (!opened) return 0
+        synchronized(lock) {
+            val remaining = size - cursor
+            if (remaining <= 0) return if (ended) -1 else 0
+            val count = minOf(length, remaining, audioPcmData.size)
+            System.arraycopy(samples, cursor, audioPcmData, 0, count)
+            cursor += count
+            if (cursor == size) { cursor = 0; size = 0 }  // 读空即复位，缓冲只需装下握手期间的积压
+            return count
+        }
+    }
+
+    override fun start() = Unit
+    override fun stop() = Unit
+    override fun isCallbackAudioData(): Boolean = false
+}
+```
+
+收尾时的注意点：
+
+- 结果用 `CompletableDeferred` 收口，只认第一次完成（`cancelOralEvaluation()` 会在锁内同步回调 `onError(-107)`）。录音中途出错先存进去，松手时再抛出。
+- `startOralEvaluation` 同步抛异常时，SDK 读线程已经起来了，要 `cancelOralEvaluation()` + `release()`，否则读线程每 10ms 读一次 0，一直空转。
+
+### 替代方案
+
+- **必须回放已录好的音频时**：在 `read()` 里按「已发样本数 ≤ 放行后经过时间 × 2 倍实时」限量返回。代价是出分要多等约一半的录音时长。
+- **服务端的录音识别模式（`rec_mode=1`）**：允许整段一次性发送（上限 60s），直连实测 14.5s 录音 2s 出分。但 SDK 设了 `REC_MODE=1` 会改走 `RecordFileOralEvaluationTask`，有上文说的线程空转问题，只适合不经过 SDK、自己直连服务端的场景。
+
+### 排查手段：绕过 SDK 直连服务端
+
+Node 24 自带 `WebSocket`，几十行就能复现服务端行为（限速阈值、模式差异）：
+
+- 地址为 `wss://soe.cloud.tencent.com/soe/api/<appId>?<参数>&signature=<sig>`。参数包括：
+  - `secretid`、`timestamp`、`expired`、`nonce`、`voice_id`
+  - `server_engine_type=16k_en`、`voice_format=0`、`text_mode=0`
+  - `ref_text`、`eval_mode`、`score_coeff`、`sentence_info_enabled`，可选 `rec_mode`
+- 签名为 `base64(HMAC-SHA1(secretKey, "soe.cloud.tencent.com/soe/api/<appId>?" + 按 key 排序的 k=v 用 & 连接（值不编码）))`；URL 里每个值和签名都要 `encodeURIComponent`。
+- 收到握手 `code:0` 后发二进制 PCM 帧，最后发文本 `{"type": "end"}`，等 `final:1`。
+- 测试语音可用 macOS `say -v Samantha --file-format=WAVE --data-format=LEI16@16000 -o x.wav "..."` 生成。凭证从本地配置读取，不要打印出来。
+
+项目内记录：私有仓库 Issue #735 / PR #736。
