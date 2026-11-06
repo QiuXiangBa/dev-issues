@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 47 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 49 条。
 
 ## ai-tools
 
@@ -44,6 +44,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-06 | [MetricKit 调用栈只有地址，借同芯片同系统版本设备的 DeviceSupport 符号用 atos 还原](issues/swift/2026-11-06-symbolicate-with-other-device-symbols.md) | ios | metrickit, symbolication, atos, dsym, device-support, crash-reporting |
+| workaround | 2026-11-06 | [MetricKit 崩溃诊断拿不到 Objective-C 异常原文（exceptionReason 恒为空）](issues/swift/2026-11-06-metrickit-crash-exception-reason-empty.md) | ios | metrickit, crash-reporting, nsexception, diagnostics, ios27 |
 | solved | 2026-10-16 | [SwiftUI ZStack 里垫一层整屏 contentShape + onTapGesture 后，叠在上面的小 Button 点不到（正中也不响应），命中区撑到 44×30 才行](issues/swift/2026-10-16-fullscreen-tap-layer-steals-small-button-taps.md) | ios | swiftui, button, hit-testing, contentshape, tap-gesture, zstack, keyboard-dismiss, xcuitest, touch-target |
 | solved | 2026-10-16 | [AVPlayer seek 到未缓冲处期间周期时间观察者继续报旧位置，自绘进度条退回再跳](issues/swift/2026-10-16-avplayer-seek-observer-reports-old-time.md) | ios | avplayer, avfoundation, seek, periodic-time-observer, progress-bar, swiftui |
 | solved | 2026-10-14 | [Debug 构建硬编码的调试 token 过期后，公开接口（发码 / 登录）也返回 401](issues/swift/2026-10-14-debug-hardcoded-token-public-endpoint-401.md) | ios | auth, 401, authorization-header, debug, hardcoded-token, urlsession, spring |
