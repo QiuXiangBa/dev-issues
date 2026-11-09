@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 50 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 51 条。
 
 ## ai-tools
 
@@ -26,6 +26,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-09 | [Android 17 隐式回环配置会绕过全局明文禁用](issues/kotlin/2026-11-09-android17-localhost-cleartext-exception.md) | android | android17, network-security-config, cleartext, localhost, loopback, ipv6, okhttp, instrumentation |
 | workaround | 2026-11-05 | [华为 AGC 插件 agcp 接入 Kotlin DSL 安卓工程：版本不兼容、配置缓存报错、json 缺包名](issues/kotlin/2026-11-05-huawei-agcp-kotlin-dsl-pitfalls.md) | android | huawei, agconnect, agcp, gradle, configuration-cache, kotlin-dsl, version-catalog, r8, resource-shrinking |
 | open | 2026-11-04 | [安卓设备解不了 4K H.264：ExoPlayer 只有 4K 素材报加载失败，其它分辨率正常](issues/kotlin/2026-11-04-android-4k-h264-decode-unsupported.md) | android | exoplayer, media3, mediacodec, h264, avc, 4k, decoder, video-resolution, android-tablet, transcode |
 | solved | 2026-10-27 | [模拟器测 Compose NavHost predictive back：动画时长放大后预览不动、慢速注入手势被系统取消](issues/kotlin/2026-10-27-compose-predictive-back-emulator-test-pitfalls.md) | android | compose, navigation-compose, predictive-back, animator-duration-scale, emulator, adb, input-swipe, walkthrough |
