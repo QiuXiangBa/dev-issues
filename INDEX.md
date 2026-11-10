@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 56 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 57 条。
 
 ## ai-tools
 
@@ -52,6 +52,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-10 | [ISO8601DateFormatter 宽松解析尾串：诊断导出需重新格式化时间戳](issues/swift/2026-11-10-iso8601-trailing-text-canonicalization.md) | ios | iso8601, foundation, timestamp, parsing, canonicalization, diagnostic-logs, privacy |
 | solved | 2026-11-10 | [iOS 15/16 的原始中文资源 URL 解析失败，导致图片空白或音频被当作未配置](issues/swift/2026-11-10-ios15-unicode-resource-url-encoding.md) | ios | ios15, foundation, url, unicode, percent-encoding, cfurl, kingfisher |
 | solved | 2026-11-10 | [SwiftUI 应用降低到 iOS 15 时要同时回退异步等待和页面效果](issues/swift/2026-11-10-ios15-swiftui-concurrency-backdeployment.md) | ios | ios15, back-deployment, swiftui, task-sleep, cancellation, availability |
 | workaround | 2026-11-10 | [新 Xcode 可部署旧 iOS 却无法操作真机，XCTest 还需匹配旧运行库](issues/swift/2026-11-10-ios15-legacy-xctest-device-support.md) | ios | xcode, ios15, device-support, xcuitest, webdriveragent, usbmux, mach-o |
