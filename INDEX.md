@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 51 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 55 条。
 
 ## ai-tools
 
@@ -46,6 +46,10 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-10 | [iOS 15/16 的原始中文资源 URL 解析失败，导致图片空白或音频被当作未配置](issues/swift/2026-11-10-ios15-unicode-resource-url-encoding.md) | ios | ios15, foundation, url, unicode, percent-encoding, cfurl, kingfisher |
+| solved | 2026-11-10 | [SwiftUI 应用降低到 iOS 15 时要同时回退异步等待和页面效果](issues/swift/2026-11-10-ios15-swiftui-concurrency-backdeployment.md) | ios | ios15, back-deployment, swiftui, task-sleep, cancellation, availability |
+| workaround | 2026-11-10 | [新 Xcode 可部署旧 iOS 却无法操作真机，XCTest 还需匹配旧运行库](issues/swift/2026-11-10-ios15-legacy-xctest-device-support.md) | ios | xcode, ios15, device-support, xcuitest, webdriveragent, usbmux, mach-o |
+| solved | 2026-11-10 | [Release 真机安装需匹配开发签名权限，不能用容器路径不变验收升级](issues/swift/2026-11-10-ios-release-development-signing-validation.md) | ios | ios, release, codesign, provisioning, get-task-allow, keychain, data-container |
 | solved | 2026-11-06 | [MetricKit 调用栈只有地址，借同芯片同系统版本设备的 DeviceSupport 符号用 atos 还原](issues/swift/2026-11-06-symbolicate-with-other-device-symbols.md) | ios | metrickit, symbolication, atos, dsym, device-support, crash-reporting |
 | workaround | 2026-11-06 | [MetricKit 崩溃诊断拿不到 Objective-C 异常原文（exceptionReason 恒为空）](issues/swift/2026-11-06-metrickit-crash-exception-reason-empty.md) | ios | metrickit, crash-reporting, nsexception, diagnostics, ios27 |
 | solved | 2026-10-16 | [SwiftUI ZStack 里垫一层整屏 contentShape + onTapGesture 后，叠在上面的小 Button 点不到（正中也不响应），命中区撑到 44×30 才行](issues/swift/2026-10-16-fullscreen-tap-layer-steals-small-button-taps.md) | ios | swiftui, button, hit-testing, contentshape, tap-gesture, zstack, keyboard-dismiss, xcuitest, touch-target |
