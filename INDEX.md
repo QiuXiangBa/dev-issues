@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 59 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 60 条。
 
 ## ai-tools
 
@@ -16,6 +16,7 @@
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
 | workaround | 2026-11-11 | [Tailscale 阻断云内 DNS 回包：用 systemd 为单个服务隔离解析配置](issues/common/2026-11-11-tailscale-systemd-service-dns.md) | backend | tailscale, systemd, dns, cgnat, resolv-conf, mount-namespace, unknown-host, rds |
+| solved | 2026-11-11 | [飞书多维表格字段改型后查找引用条件失效，需重新绑定单选选项](issues/common/2026-11-11-feishu-field-type-lookup-rebind.md) | web | feishu, bitable, field-type, lookup, single-select, view-filter |
 | solved | 2026-11-06 | [飞书多维表格单选筛选未知选项返回 1254018 InvalidFilter](issues/common/2026-11-06-feishu-single-select-unknown-option-filter.md) | backend | feishu, bitable, single-select, filter, invalid-filter, metadata, mock-testing |
 | solved | 2026-11-04 | [App Store 查询接口 itunes.apple.com/lookup 偶发返回 0 条：CDN 节点缓存了空结果](issues/common/2026-11-04-itunes-lookup-cdn-cached-empty-result.md) | ios | itunes-lookup, app-store, version-check, update-prompt, cdn, akamai, cache-busting |
 | solved | 2026-10-26 | [Debug 包连测试环境、Release 包连生产环境：真机上的后端业务报错在模拟器复现不出来](issues/common/2026-10-26-debug-release-different-backend-env.md) | ios, android | environment, base-url, debug, release, build-config, backend, code-600, simulator, real-device, testflight |
