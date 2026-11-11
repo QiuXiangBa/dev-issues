@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 57 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 58 条。
 
 ## ai-tools
 
@@ -52,6 +52,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-11 | [SwiftUI 启动时账号已就绪但 onChange 尚未更新，误清同作用域事件提示](issues/swift/2026-11-11-swiftui-bootstrap-notice-account-scope-race.md) | ios | swiftui, onchange, bootstrap, async, account-scope, notice, race-condition |
 | solved | 2026-11-10 | [ISO8601DateFormatter 宽松解析尾串：诊断导出需重新格式化时间戳](issues/swift/2026-11-10-iso8601-trailing-text-canonicalization.md) | ios | iso8601, foundation, timestamp, parsing, canonicalization, diagnostic-logs, privacy |
 | solved | 2026-11-10 | [iOS 15/16 的原始中文资源 URL 解析失败，导致图片空白或音频被当作未配置](issues/swift/2026-11-10-ios15-unicode-resource-url-encoding.md) | ios | ios15, foundation, url, unicode, percent-encoding, cfurl, kingfisher |
 | solved | 2026-11-10 | [SwiftUI 应用降低到 iOS 15 时要同时回退异步等待和页面效果](issues/swift/2026-11-10-ios15-swiftui-concurrency-backdeployment.md) | ios | ios15, back-deployment, swiftui, task-sleep, cancellation, availability |
