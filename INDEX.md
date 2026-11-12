@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 63 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 65 条。
 
 ## ai-tools
 
@@ -56,6 +56,8 @@
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
 | solved | 2026-11-12 | [SwiftUI 单参数 onChange 回读旧 scenePhase，导致前后台状态反转](issues/swift/2026-11-12-swiftui-onchange-old-phase-capture.md) | ios | swiftui, onchange, scenephase, lifecycle, stale-capture |
+| workaround | 2026-11-12 | [SwiftUI 相机黑屏的全屏呈现修复与草稿生命周期保护](issues/swift/2026-11-12-swiftui-camera-fullscreen-draft-lifecycle.md) | ios | swiftui, uikit, camera, fullscreen, view-lifecycle, draft-state |
+| solved | 2026-11-12 | [前台到期刷新不能在有限次重试后永久停止](issues/swift/2026-11-12-foreground-expiry-capped-backoff.md) | ios | swiftui, concurrency, expiry, retry, backoff, account-scope |
 | solved | 2026-11-12 | [同账号异步旧响应覆盖新权益与配额，需要发布 revision 与账号代际双重检查](issues/swift/2026-11-12-async-state-stale-result-ordering.md) | ios | async, revision, race-condition, entitlement, quota, account-scope |
 | solved | 2026-11-11 | [SwiftUI 启动时账号已就绪但 onChange 尚未更新，误清同作用域事件提示](issues/swift/2026-11-11-swiftui-bootstrap-notice-account-scope-race.md) | ios | swiftui, onchange, bootstrap, async, account-scope, notice, race-condition |
 | solved | 2026-11-10 | [ISO8601DateFormatter 宽松解析尾串：诊断导出需重新格式化时间戳](issues/swift/2026-11-10-iso8601-trailing-text-canonicalization.md) | ios | iso8601, foundation, timestamp, parsing, canonicalization, diagnostic-logs, privacy |
