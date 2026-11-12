@@ -1,11 +1,12 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 66 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 67 条。
 
 ## ai-tools
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-12 | [Magpie 接入 Claude Code 扩展时旧模型环境变量覆盖配置](issues/ai-tools/2026-11-12-magpie-vscode-claude-env-override.md) |  | magpie, vscode, claude-code, environment-variables, model-routing, streaming |
 | solved | 2026-11-12 | [Codex 操作飞书多维表格批量粘贴错位：确认网格选区、保留双格式剪贴板并回读校验](issues/ai-tools/2026-11-12-feishu-grid-paste-focus-recovery.md) | web | codex, cua, feishu, bitable, clipboard, html, grid-selection, data-validation |
 | solved | 2026-09-29 | [Figma 导出 SVG 的硬投影滤镜（hardAlpha + feOffset）光栅化后边缘锯齿：改画实体偏移副本](issues/ai-tools/2026-09-29-figma-svg-drop-shadow-filter-aliased-edges.md) | ios, web | figma, svg, drop-shadow, filter, svg-rasterize, wkwebview, antialiasing, design-to-code |
 | solved | 2026-09-16 | [Figma 旋转存储的画板：多层 SVG 素材用 JSX 转 HTML 整页反旋转后 WKWebView 光栅化](issues/ai-tools/2026-09-16-figma-rotated-artboard-svg-assets-via-html.md) | ios, web | figma, mcp, design-to-code, svg-rasterize, wkwebview, tailwind, rotated-artboard, claude-code |
