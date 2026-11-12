@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 67 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 68 条。
 
 ## ai-tools
 
@@ -91,6 +91,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-12 | [开发者工具基础库清单获取失败，WAServiceMainContext.js 加载返回 500](issues/wechat-mp/2026-11-12-devtools-vendor-script-http-500.md) | wechat | devtools, sdk, initialization, http-500, authentication, metadata, cache, signature |
 | workaround | 2026-10-21 | [开发者工具灰度基础库启动报 PageTypeById undefined](issues/wechat-mp/2026-10-21-gray-sdk-page-type-initialization.md) | wechat | devtools, sdk, initialization, worktree, configuration |
 | solved | 2026-10-20 | [异步登录后恢复操作误用目标，取消登录无法退出编辑面板](issues/wechat-mp/2026-10-20-phone-login-operation-resume-races.md) | wechat | auth, async, account-merge, resume, cancellation, lifecycle, bottom-sheet |
 | solved | 2026-10-20 | [组件 WXSS 禁用态属性选择器警告与基础库样式优先级覆盖](issues/wechat-mp/2026-10-20-component-disabled-selector-specificity.md) | wechat | wxss, custom-component, attribute-selector, disabled, specificity, wcsc |
