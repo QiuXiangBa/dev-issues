@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 60 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 63 条。
 
 ## ai-tools
 
@@ -28,6 +28,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-12 | [Apple 真实续订 signedDate 可早于 purchaseDate，跨字段顺序校验会误拒可信交易](issues/java/2026-11-12-appstore-renewal-signeddate-before-purchase.md) | backend | storekit, app-store-server-api, jws, signed-date, purchase-date, timestamp-validation |
 | solved | 2026-11-10 | [Jackson 静默修正非法日期并截断整数入参的小数](issues/java/2026-11-10-jackson-date-integer-coercion.md) | backend | jackson, json, validation, localdate, coercion, regression-test |
 
 ## kotlin
@@ -54,6 +55,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-12 | [SwiftUI 单参数 onChange 回读旧 scenePhase，导致前后台状态反转](issues/swift/2026-11-12-swiftui-onchange-old-phase-capture.md) | ios | swiftui, onchange, scenephase, lifecycle, stale-capture |
+| solved | 2026-11-12 | [同账号异步旧响应覆盖新权益与配额，需要发布 revision 与账号代际双重检查](issues/swift/2026-11-12-async-state-stale-result-ordering.md) | ios | async, revision, race-condition, entitlement, quota, account-scope |
 | solved | 2026-11-11 | [SwiftUI 启动时账号已就绪但 onChange 尚未更新，误清同作用域事件提示](issues/swift/2026-11-11-swiftui-bootstrap-notice-account-scope-race.md) | ios | swiftui, onchange, bootstrap, async, account-scope, notice, race-condition |
 | solved | 2026-11-10 | [ISO8601DateFormatter 宽松解析尾串：诊断导出需重新格式化时间戳](issues/swift/2026-11-10-iso8601-trailing-text-canonicalization.md) | ios | iso8601, foundation, timestamp, parsing, canonicalization, diagnostic-logs, privacy |
 | solved | 2026-11-10 | [iOS 15/16 的原始中文资源 URL 解析失败，导致图片空白或音频被当作未配置](issues/swift/2026-11-10-ios15-unicode-resource-url-encoding.md) | ios | ios15, foundation, url, unicode, percent-encoding, cfurl, kingfisher |
