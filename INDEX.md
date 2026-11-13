@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 69 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 71 条。
 
 ## ai-tools
 
@@ -17,6 +17,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-13 | [Blender 缓存关键帧 RNA 引用后删除导致重复烘焙报错](issues/common/2026-11-13-blender-keyframe-rna-removal-rebake.md) |  | blender, python, fcurve, keyframe, rna, animation |
+| workaround | 2026-11-13 | [Blender Audaspace Sound.write 重采样导出末尾多出非静音样本](issues/common/2026-11-13-blender-audaspace-write-tail-samples.md) |  | blender, audaspace, audio, resampling, pcm, sample-count |
 | workaround | 2026-11-11 | [Tailscale 阻断云内 DNS 回包：用 systemd 为单个服务隔离解析配置](issues/common/2026-11-11-tailscale-systemd-service-dns.md) | backend | tailscale, systemd, dns, cgnat, resolv-conf, mount-namespace, unknown-host, rds |
 | solved | 2026-11-11 | [飞书多维表格字段改型后查找引用条件失效，需重新绑定单选选项](issues/common/2026-11-11-feishu-field-type-lookup-rebind.md) | web | feishu, bitable, field-type, lookup, single-select, view-filter |
 | solved | 2026-11-06 | [飞书多维表格单选筛选未知选项返回 1254018 InvalidFilter](issues/common/2026-11-06-feishu-single-select-unknown-option-filter.md) | backend | feishu, bitable, single-select, filter, invalid-filter, metadata, mock-testing |
