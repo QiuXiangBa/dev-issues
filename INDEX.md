@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 71 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 73 条。
 
 ## ai-tools
 
@@ -17,6 +17,8 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| workaround | 2026-11-16 | [FFmpeg 9 未显式指定 movie timescale 时 MP4 章节异常](issues/common/2026-11-16-ffmpeg-mp4-chapter-timescale.md) |  | ffmpeg, mp4, chapters, timescale, remux |
+| solved | 2026-11-16 | [Blender 循环单帧渲染重复开销过高，改用连续动画渲染](issues/common/2026-11-16-blender-animation-render-engine-reuse.md) |  | blender, eevee, animation, render, performance |
 | solved | 2026-11-13 | [Blender 缓存关键帧 RNA 引用后删除导致重复烘焙报错](issues/common/2026-11-13-blender-keyframe-rna-removal-rebake.md) |  | blender, python, fcurve, keyframe, rna, animation |
 | workaround | 2026-11-13 | [Blender Audaspace Sound.write 重采样导出末尾多出非静音样本](issues/common/2026-11-13-blender-audaspace-write-tail-samples.md) |  | blender, audaspace, audio, resampling, pcm, sample-count |
 | workaround | 2026-11-11 | [Tailscale 阻断云内 DNS 回包：用 systemd 为单个服务隔离解析配置](issues/common/2026-11-11-tailscale-systemd-service-dns.md) | backend | tailscale, systemd, dns, cgnat, resolv-conf, mount-namespace, unknown-host, rds |
