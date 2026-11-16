@@ -1,11 +1,12 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 73 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 74 条。
 
 ## ai-tools
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| workaround | 2026-11-16 | [Magpie 自动填写密钥后获取模型报 401：真实粘贴同步输入状态](issues/ai-tools/2026-11-16-magpie-key-input-state-401.md) |  | magpie, codex, cua, macos, wails, webview, input-events, api-key, http-401 |
 | solved | 2026-11-12 | [Magpie 接入 Claude Code 扩展时旧模型环境变量覆盖配置](issues/ai-tools/2026-11-12-magpie-vscode-claude-env-override.md) |  | magpie, vscode, claude-code, environment-variables, model-routing, streaming |
 | solved | 2026-11-12 | [Codex 操作飞书多维表格批量粘贴错位：确认网格选区、保留双格式剪贴板并回读校验](issues/ai-tools/2026-11-12-feishu-grid-paste-focus-recovery.md) | web | codex, cua, feishu, bitable, clipboard, html, grid-selection, data-validation |
 | solved | 2026-09-29 | [Figma 导出 SVG 的硬投影滤镜（hardAlpha + feOffset）光栅化后边缘锯齿：改画实体偏移副本](issues/ai-tools/2026-09-29-figma-svg-drop-shadow-filter-aliased-edges.md) | ios, web | figma, svg, drop-shadow, filter, svg-rasterize, wkwebview, antialiasing, design-to-code |
