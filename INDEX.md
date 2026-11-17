@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 79 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 81 条。
 
 ## ai-tools
 
@@ -110,3 +110,5 @@
 | solved | 2026-10-20 | [账号门禁拦截内部清理回调，导航失败后计时和音频仍运行](issues/wechat-mp/2026-10-20-auth-gate-resource-cleanup.md) | wechat | auth, lifecycle, cleanup, navigation, timer, audio, observer |
 | solved | 2026-10-05 | [自定义 tabBar 盖在页面弹层之上，z-index 再大也盖不住](issues/wechat-mp/2026-10-05-custom-tab-bar-above-page-overlay.md) | wechat | custom-tab-bar, tabbar, z-index, overlay, bottom-sheet |
 | solved | 2026-10-03 | [rpx 向下取整成整数 px，按盒子拉伸的 SVG 背景图被等比缩小、两端图形往里挪](issues/wechat-mp/2026-10-03-rpx-floor-shrinks-stretched-svg-background.md) | wechat | rpx, wxss, svg, data-uri, background-size, preserveaspectratio, pixel-rounding, layout, flex, columns |
+| solved | 2026-09-11 | [iOS 微信 RecorderManager 录的 mp3 末尾是残帧、wav 长度字段错误，严格校验的服务端 400](issues/wechat-mp/2026-09-11-ios-recorder-mp3-partial-last-frame.md) | wechat, ios | recorder-manager, getrecordermanager, mp3, wav, uploadfile, asr, audio-validation, ios |
+| solved | 2026-09-11 | [开发者工具模拟器 RecorderManager 录出的 mp3 / wav 实际是 WebM，服务端按内容校验必失败](issues/wechat-mp/2026-09-11-devtools-recorder-outputs-webm.md) | wechat | devtools, simulator, recorder-manager, getrecordermanager, uploadfile, webm, mp3, asr |
