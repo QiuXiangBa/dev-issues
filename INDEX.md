@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 81 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 82 条。
 
 ## ai-tools
 
@@ -22,6 +22,7 @@
 | solved | 2026-11-17 | [Spine 动画被显式打断后混出 entry 仍触发 Complete](issues/common/2026-11-17-spine-mixing-complete-after-interrupt.md) |  | spine, spine-cpp, animation, mixing, callback, lifecycle, cancellation |
 | solved | 2026-11-17 | [Spine C++ 骨骼接入 GLES 后上下倒置](issues/common/2026-11-17-spine-gles-y-down-projection.md) |  | spine, spine-cpp, opengl-es, projection, coordinates, y-down, harmonyos |
 | solved | 2026-11-17 | [PixelMap 读回 RGBA 时混用内部 stride 导致缓冲区布局不一致](issues/common/2026-11-17-pixelmap-readback-packed-row-stride.md) |  | harmonyos, arkts, imagekit, pixelmap, stride, rgba, opengl-es |
+| solved | 2026-11-17 | [DevEco 命令行 ohpm / hvigorw 只从 PATH 或 NODE&#95;HOME 找 node，系统另装的 node 会掩盖配置缺失](issues/common/2026-11-17-deveco-cli-node-from-path.md) |  | harmonyos, deveco, ohpm, hvigor, nodejs, path, node-home, cli, build |
 | workaround | 2026-11-16 | [FFmpeg 9 未显式指定 movie timescale 时 MP4 章节异常](issues/common/2026-11-16-ffmpeg-mp4-chapter-timescale.md) |  | ffmpeg, mp4, chapters, timescale, remux |
 | solved | 2026-11-16 | [Blender 循环单帧渲染重复开销过高，改用连续动画渲染](issues/common/2026-11-16-blender-animation-render-engine-reuse.md) |  | blender, eevee, animation, render, performance |
 | solved | 2026-11-13 | [Blender 缓存关键帧 RNA 引用后删除导致重复烘焙报错](issues/common/2026-11-13-blender-keyframe-rna-removal-rebake.md) |  | blender, python, fcurve, keyframe, rna, animation |
