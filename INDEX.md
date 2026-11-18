@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 82 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 83 条。
 
 ## ai-tools
 
@@ -18,6 +18,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| workaround | 2026-11-18 | [打包 LibreOffice 导出中日文缺字 显式提供 Noto CJK 字体后恢复](issues/common/2026-11-18-libreoffice-headless-cjk-fonts.md) |  | libreoffice, headless, docx, cjk, fonts, fontconfig |
 | solved | 2026-11-17 | [XComponent 的 EGL 已透明清屏却仍显示黑色矩形背景](issues/common/2026-11-17-xcomponent-egl-transparent-background.md) |  | harmonyos, arkts, xcomponent, egl, opengl-es, alpha, transparency |
 | solved | 2026-11-17 | [Spine 动画被显式打断后混出 entry 仍触发 Complete](issues/common/2026-11-17-spine-mixing-complete-after-interrupt.md) |  | spine, spine-cpp, animation, mixing, callback, lifecycle, cancellation |
 | solved | 2026-11-17 | [Spine C++ 骨骼接入 GLES 后上下倒置](issues/common/2026-11-17-spine-gles-y-down-projection.md) |  | spine, spine-cpp, opengl-es, projection, coordinates, y-down, harmonyos |
