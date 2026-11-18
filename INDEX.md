@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 84 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 86 条。
 
 ## ai-tools
 
@@ -20,6 +20,8 @@
 |---|---|---|---|---|
 | solved | 2026-11-18 | [macOS 同开 Tailscale DNS 与代理隧道时默认 DNS 超时，模拟器和命令行工具解析失败](issues/common/2026-11-18-tailscale-dns-vpn-conflict-emulator-dns.md) |  | dns, tailscale, magicdns, shadowrocket, vpn, tun, emulator, slirp, harmonyos, gh, cli, macos |
 | workaround | 2026-11-18 | [打包 LibreOffice 导出中日文缺字 显式提供 Noto CJK 字体后恢复](issues/common/2026-11-18-libreoffice-headless-cjk-fonts.md) |  | libreoffice, headless, docx, cjk, fonts, fontconfig |
+| solved | 2026-11-18 | [鸿蒙 AVSession setAVPlaybackState 传 speed: 0 报 401 invalid parameters，播控中心暂停图标不切换](issues/common/2026-11-18-avsession-playback-state-speed-zero-401.md) |  | harmonyos, arkts, avsession, avplaybackstate, playback-state, media-controls, control-center, background-audio |
+| solved | 2026-11-18 | [鸿蒙 AVPlayer 退后台即被系统暂停（StateChangeReason.BACKGROUND）：未接入 AVSession](issues/common/2026-11-18-avplayer-background-pause-without-avsession.md) |  | harmonyos, arkts, avplayer, avsession, background-audio, continuous-task, background-running, audio-playback, state-change |
 | solved | 2026-11-17 | [XComponent 的 EGL 已透明清屏却仍显示黑色矩形背景](issues/common/2026-11-17-xcomponent-egl-transparent-background.md) |  | harmonyos, arkts, xcomponent, egl, opengl-es, alpha, transparency |
 | solved | 2026-11-17 | [Spine 动画被显式打断后混出 entry 仍触发 Complete](issues/common/2026-11-17-spine-mixing-complete-after-interrupt.md) |  | spine, spine-cpp, animation, mixing, callback, lifecycle, cancellation |
 | solved | 2026-11-17 | [Spine C++ 骨骼接入 GLES 后上下倒置](issues/common/2026-11-17-spine-gles-y-down-projection.md) |  | spine, spine-cpp, opengl-es, projection, coordinates, y-down, harmonyos |
