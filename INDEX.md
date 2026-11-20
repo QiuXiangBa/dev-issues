@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 86 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 87 条。
 
 ## ai-tools
 
@@ -18,6 +18,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| workaround | 2026-11-20 | [HarmonyOS 部分 SVG 图形在模拟器中缺失：离线转透明 PNG 规避](issues/common/2026-11-20-harmony-svg-partial-rendering.md) |  | harmonyos, arkts, arkui, svg, image, rasterization, visual-testing |
 | solved | 2026-11-18 | [macOS 同开 Tailscale DNS 与代理隧道时默认 DNS 超时，模拟器和命令行工具解析失败](issues/common/2026-11-18-tailscale-dns-vpn-conflict-emulator-dns.md) |  | dns, tailscale, magicdns, shadowrocket, vpn, tun, emulator, slirp, harmonyos, gh, cli, macos |
 | workaround | 2026-11-18 | [打包 LibreOffice 导出中日文缺字 显式提供 Noto CJK 字体后恢复](issues/common/2026-11-18-libreoffice-headless-cjk-fonts.md) |  | libreoffice, headless, docx, cjk, fonts, fontconfig |
 | solved | 2026-11-18 | [鸿蒙 AVSession setAVPlaybackState 传 speed: 0 报 401 invalid parameters，播控中心暂停图标不切换](issues/common/2026-11-18-avsession-playback-state-speed-zero-401.md) |  | harmonyos, arkts, avsession, avplaybackstate, playback-state, media-controls, control-center, background-audio |
