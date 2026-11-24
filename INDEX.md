@@ -1,6 +1,6 @@
 # 索引
 
-由 `scripts/index.sh` 自动生成，不要手改。共 88 条。
+由 `scripts/index.sh` 自动生成，不要手改。共 89 条。
 
 ## ai-tools
 
@@ -73,6 +73,7 @@
 
 | 状态 | 日期 | 标题 | 端 | 标签 |
 |---|---|---|---|---|
+| solved | 2026-11-24 | [SwiftUI 静止按压响应慢：从原始触摸时间戳定位手势延迟](issues/swift/2026-11-24-stationary-press-gesture-latency.md) | ios | swiftui, uikit, drag-gesture, touch-latency, xcuitest |
 | solved | 2026-11-17 | [XCUITest 权限弹框等待耗尽迟到结果窗口，导致取消测试误报](issues/swift/2026-11-17-xcuitest-cancellation-window-permission-wait.md) | ios | xcuitest, xctest, cancellation, permission, timeout, race-condition, test-timing |
 | workaround | 2026-11-13 | [Xcode UI 测试通过后等待模拟器诊断，xcresult 无法完成归档](issues/swift/2026-11-13-xcodebuild-simulator-diagnostics-finalization.md) | ios | xcodebuild, xcuitest, simulator, xcresult, diagnostics, sysdiagnose |
 | solved | 2026-11-12 | [SwiftUI 单参数 onChange 回读旧 scenePhase，导致前后台状态反转](issues/swift/2026-11-12-swiftui-onchange-old-phase-capture.md) | ios | swiftui, onchange, scenephase, lifecycle, stale-capture |
